@@ -1,4 +1,5 @@
 ﻿using Treinou.Domain.SeedWork;
+using Treinou.Domain.Validation;
 
 namespace Treinou.Domain.Entities
 {
@@ -28,6 +29,12 @@ namespace Treinou.Domain.Entities
             DataDeNascimento = dataNascimento;
             Ativo = ativo;
             CriadoEm = DateTime.Now;
+            Validar();
+        }
+
+        public void Validar()
+        {
+            ValidacaoDominio.NaoNuloOuVazio(Nome, nameof(Nome));
         }
     }
 }
