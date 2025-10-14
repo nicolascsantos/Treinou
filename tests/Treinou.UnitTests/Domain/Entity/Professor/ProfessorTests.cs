@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Entidades = Treinou.Domain.Entities;
 
 namespace Treinou.UnitTests.Domain.Entity.Professor
 {
@@ -22,24 +23,24 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
             var professor = new Entidades.Professor
             (
                 professorValido.Nome,
-                professorValido.Email,
                 professorValido.CPF,
+                professorValido.Email,
                 professorValido.Telefone,
                 professorValido.DataDeNascimento
             );
 
             var dataDepoisCriacao = DateTime.Now;
 
-            professor.Id.Should().NotBeNull();
+            professor.Should().NotBeNull();
             professor.Nome.Should().Be(professorValido.Nome);
-            professor.Email.Should().Be(professorValido.Nome);
+            professor.Email.Should().Be(professorValido.Email);
             professor.CPF.Should().Be(professorValido.CPF);
             professor.Telefone.Should().Be(professorValido.Telefone);
             professor.DataDeNascimento.Should().Be(professorValido.DataDeNascimento);
             professor.CriadoEm.Should().NotBeSameDateAs(default);
             (professor.CriadoEm >= dataAntesCriacao).Should().BeTrue();
             (professor.CriadoEm <= dataDepoisCriacao).Should().BeTrue();
-            (professor.Ativo).Should().BeTrue();
+            professor.Ativo.Should().BeTrue();
         }
     }
 }

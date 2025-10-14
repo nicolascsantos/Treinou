@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02E26703
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treinou.UnitTests", "tests\Treinou.UnitTests\Treinou.UnitTests.csproj", "{A4F4D1CC-0344-4E9D-A12D-8D343840A866}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treinou.Domain", "src\Treinou.Domain\Treinou.Domain.csproj", "{7D08933C-F5A2-4D04-BF22-616CAEAE3A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{A4F4D1CC-0344-4E9D-A12D-8D343840A866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F4D1CC-0344-4E9D-A12D-8D343840A866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F4D1CC-0344-4E9D-A12D-8D343840A866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D08933C-F5A2-4D04-BF22-616CAEAE3A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D08933C-F5A2-4D04-BF22-616CAEAE3A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D08933C-F5A2-4D04-BF22-616CAEAE3A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D08933C-F5A2-4D04-BF22-616CAEAE3A59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A4F4D1CC-0344-4E9D-A12D-8D343840A866} = {02E26703-E04C-44BB-984A-923A8471807B}
+		{7D08933C-F5A2-4D04-BF22-616CAEAE3A59} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95AE1616-DD38-4E76-ADD4-83E6EDBB66C0}
