@@ -25,8 +25,8 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
             (
                 professorValido.Nome,
                 professorValido.CPF.Numero,
-                professorValido.Email,
-                professorValido.Telefone,
+                professorValido.Email.Endereco,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento
             );
 
@@ -34,9 +34,9 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
 
             professor.Should().NotBeNull();
             professor.Nome.Should().Be(professorValido.Nome);
-            professor.Email.Should().Be(professorValido.Email);
+            professor.Email.Endereco.Should().Be(professorValido.Email.Endereco);
             professor.CPF.Numero.Should().Be(professorValido.CPF.Numero);
-            professor.Telefone.Should().Be(professorValido.Telefone);
+            professor.Telefone.Numero.Should().Be(professorValido.Telefone.Numero);
             professor.DataDeNascimento.Should().Be(professorValido.DataDeNascimento);
             professor.CriadoEm.Should().NotBeSameDateAs(default);
             (professor.CriadoEm >= dataAntesCriacao).Should().BeTrue();
@@ -58,8 +58,8 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
             (
                 professorValido.Nome,
                 professorValido.CPF.Numero,
-                professorValido.Email,
-                professorValido.Telefone,
+                professorValido.Email.Endereco,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento,
                 ativo
             );
@@ -68,9 +68,9 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
 
             professor.Should().NotBeNull();
             professor.Nome.Should().Be(professorValido.Nome);
-            professor.Email.Should().Be(professorValido.Email);
+            professor.Email.Endereco.Should().Be(professorValido.Email.Endereco);
             professor.CPF.Numero.Should().Be(professorValido.CPF.Numero);
-            professor.Telefone.Should().Be(professorValido.Telefone);
+            professor.Telefone.Numero.Should().Be(professorValido.Telefone.Numero);
             professor.DataDeNascimento.Should().Be(professorValido.DataDeNascimento);
             professor.CriadoEm.Should().NotBeSameDateAs(default);
             (professor.CriadoEm >= dataAntesCriacao).Should().BeTrue();
@@ -90,8 +90,8 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
             Action action = () => new Entidades.Professor(
                 nome!,
                 professorValido.CPF.Numero,
-                professorValido.Email,
-                professorValido.Telefone,
+                professorValido.Email.Endereco,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento
             );
             action.Should().Throw<EntityValidationException>()
@@ -110,8 +110,8 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
             Action action = () => new Entidades.Professor(
                 professorValido.Nome,
                 cpfNuloOuVazio!,
-                professorValido.Email,
-                professorValido.Telefone,
+                professorValido.Email.Endereco,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento
             );
             action.Should().Throw<EntityValidationException>()
@@ -121,14 +121,15 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
         [Theory(DisplayName = nameof(ExcecaoQuandoCPFForInvalido))]
         [Trait("Domain", "Professor - Entities")]
         [InlineData("12312312312")]
+        [InlineData("121212")]
         public void ExcecaoQuandoCPFForInvalido(string? cpfNuloOuVazio)
         {
             var professorValido = _fixture.GetProfessorValido();
             Action action = () => new Entidades.Professor(
                 professorValido.Nome,
                 cpfNuloOuVazio!,
-                professorValido.Email,
-                professorValido.Telefone,
+                professorValido.Email.Endereco,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento
             );
             action.Should().Throw<EntityValidationException>()
@@ -148,31 +149,51 @@ namespace Treinou.UnitTests.Domain.Entity.Professor
                 professorValido.Nome,
                 professorValido.CPF.Numero,
                 emailInvalido!,
-                professorValido.Telefone,
+                professorValido.Telefone.Numero,
                 professorValido.DataDeNascimento
             );
             action.Should().Throw<EntityValidationException>()
-                .WithMessage("Email não pode ser nulo ou vazio.");
+                .WithMessage("E-mail não pode ser vazio ou nulo.");
         }
 
-        [Theory(DisplayName = nameof(ExcecaoQuandoTelefoneForVazio))]
+        [Theory(DisplayName = nameof(ExcecaoQuandoTelefoneForVazioOuNulo))]
         [Trait("Domain", "Professor - Entities")]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
         [InlineData("  ")]
-        public void ExcecaoQuandoTelefoneForVazio(string? telefoneInvalido)
+        public void ExcecaoQuandoTelefoneForVazioOuNulo(string? telefoneVazioOuNulo)
         {
             var professorValido = _fixture.GetProfessorValido();
             Action action = () => new Entidades.Professor(
                 professorValido.Nome,
                 professorValido.CPF.Numero,
-                professorValido.Email,
+                professorValido.Email.Endereco,
+                telefoneVazioOuNulo!,
+                professorValido.DataDeNascimento
+            );
+            action.Should().Throw<EntityValidationException>()
+                .WithMessage("Telefone não pode ser vazio ou nulo.");
+        }
+
+        [Theory(DisplayName = nameof(ExcecaoQuandoTelefoneForInvalido))]
+        [Trait("Domain", "Professor - Entities")]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("13333")]
+        [InlineData("1222222222")]
+        public void ExcecaoQuandoTelefoneForInvalido(string? telefoneInvalido)
+        {
+            var professorValido = _fixture.GetProfessorValido();
+            Action action = () => new Entidades.Professor(
+                professorValido.Nome,
+                professorValido.CPF.Numero,
+                professorValido.Email.Endereco,
                 telefoneInvalido!,
                 professorValido.DataDeNascimento
             );
             action.Should().Throw<EntityValidationException>()
-                .WithMessage("Telefone não pode ser nulo ou vazio.");
+                .WithMessage("Telefone não pode ser vazio ou nulo.");
         }
     }
 }

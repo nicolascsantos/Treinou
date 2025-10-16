@@ -8,8 +8,8 @@ namespace Treinou.Domain.Entities
     {
         public string Nome { get; set; }
         public CPF CPF { get; set; }
-        public string Email { get; set; }
-        public string Telefone { get; set; }
+        public Email Email { get; set; }
+        public Telefone Telefone { get; set; }
         public DateTime DataDeNascimento { get; set; }
         public DateTime CriadoEm { get; set; }
         public bool Ativo { get; set; }
@@ -19,15 +19,15 @@ namespace Treinou.Domain.Entities
             string cpf,
             string email,
             string telefone,
-            DateTime dataNascimento,
+            DateTime dataDeNascimento,
             bool ativo = true
         )
         {
             Nome = nome;
             CPF = CPF.Criar(cpf);
-            Email = email;
-            Telefone = telefone;
-            DataDeNascimento = dataNascimento;
+            Email = Email.Criar(email);
+            Telefone = Telefone.Criar(telefone);
+            DataDeNascimento = dataDeNascimento;
             Ativo = ativo;
             CriadoEm = DateTime.Now;
             Validar();
@@ -36,13 +36,22 @@ namespace Treinou.Domain.Entities
         public void Validar()
         {
             ValidacaoDominio.NaoNuloOuVazio(Nome, nameof(Nome));
-            ValidacaoDominio.NaoNuloOuVazio(Email, nameof(Email));
-            ValidacaoDominio.NaoNuloOuVazio(Telefone, nameof(Telefone));
         }
 
-        public void Update()
+        public void Update(
+            string nome,
+            string cpf,
+            string email,
+            string telefone,
+            DateTime dataDeNascimento
+        )
         {
-
+            Nome = nome;
+            CPF = CPF.Criar(cpf);
+            Email = Email.Criar(email);
+            Telefone = Telefone;
+            DataDeNascimento = dataDeNascimento;
+            Validar();
         }
     }
 }
