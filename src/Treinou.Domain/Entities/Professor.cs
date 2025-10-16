@@ -1,12 +1,13 @@
 ﻿using Treinou.Domain.SeedWork;
 using Treinou.Domain.Validation;
+using Treinou.Domain.ValueObjects;
 
 namespace Treinou.Domain.Entities
 {
     public class Professor : Entity
     {
         public string Nome { get; set; }
-        public string CPF { get; set; }
+        public CPF CPF { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
         public DateTime DataDeNascimento { get; set; }
@@ -23,7 +24,7 @@ namespace Treinou.Domain.Entities
         )
         {
             Nome = nome;
-            CPF = cpf;
+            CPF = CPF.Criar(cpf);
             Email = email;
             Telefone = telefone;
             DataDeNascimento = dataNascimento;
@@ -35,6 +36,13 @@ namespace Treinou.Domain.Entities
         public void Validar()
         {
             ValidacaoDominio.NaoNuloOuVazio(Nome, nameof(Nome));
+            ValidacaoDominio.NaoNuloOuVazio(Email, nameof(Email));
+            ValidacaoDominio.NaoNuloOuVazio(Telefone, nameof(Telefone));
+        }
+
+        public void Update()
+        {
+
         }
     }
 }
