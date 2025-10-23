@@ -1,4 +1,5 @@
 ﻿using Treinou.Domain.SeedWork;
+using Treinou.Domain.Validation;
 using Treinou.Domain.ValueObjects;
 
 namespace Treinou.Domain.Entities
@@ -49,6 +50,8 @@ namespace Treinou.Domain.Entities
             ProfilePicture = profilePicture;
             CreatedAt = createdAt;
         }
+
+        public void Validate(ValidationHandler notificationHandler) => new CoachValidator(this, notificationHandler);
 
         public void Update(
             string name,
