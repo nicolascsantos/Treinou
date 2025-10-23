@@ -28,10 +28,10 @@ namespace Treinou.UnitTests.Domain.Coach
             coach.Should().NotBeNull();
             coach.Id.Should().NotBeEmpty();
             coach.Name.Should().Be(validCoach.Name);
-            coach.Document.Should().Be(validCoach.Document);
+            coach.CPF.Should().Be(validCoach.Document);
             coach.DateOfBirth.Should().Be(validCoach.DateOfBirth);
             coach.Email.Should().Be(validCoach.Email);
-            coach.CREFNumber.Should().Be(validCoach.CREFNumber);
+            coach.CREF.Should().Be(validCoach.CREFNumber);
             coach.Phone.Should().Be(validCoach.Phone);
             coach.CreatedAt.Should().NotBeSameDateAs(default);
             coach.CreatedAt.Should().BeAfter(dateBeforeInstantiation).And.BeBefore(dateAfterInstantiation);
