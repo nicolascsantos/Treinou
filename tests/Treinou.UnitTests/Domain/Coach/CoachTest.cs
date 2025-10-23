@@ -33,6 +33,9 @@ namespace Treinou.UnitTests.Domain.Coach
             coach.Email.Should().Be(validCoach.Email);
             coach.CREF.Should().Be(validCoach.CREFNumber);
             coach.Phone.Should().Be(validCoach.Phone);
+            coach.Biography.Should().Be(validCoach.Biography);
+            coach.Specialty.Should().Be(validCoach.Specialty);
+            coach.ProfilePicture.Should().Be(validCoach.ProfilePicture);
             coach.CreatedAt.Should().NotBeSameDateAs(default);
             coach.CreatedAt.Should().BeAfter(dateBeforeInstantiation).And.BeBefore(dateAfterInstantiation);
         }
