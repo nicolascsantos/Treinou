@@ -4,7 +4,7 @@ using Treinou.Domain.ValueObjects;
 
 namespace Treinou.Domain.Entities
 {
-    public class Aluno : Entity
+    public class Student : Entity
     {
         private const int NAME_MAX_LENGTH = 200;
         private const int NAME_MIN_LENGTH = 3;
@@ -17,7 +17,7 @@ namespace Treinou.Domain.Entities
 
         public PhoneNumber PhoneNumber { get; set; }
 
-        public DateTime DataDeNascimento { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public double Weight { get; set; }
 
@@ -27,7 +27,7 @@ namespace Treinou.Domain.Entities
 
         public DateTime CreatedAt { get; set; }
 
-        public Aluno(
+        public Student(
             string name,
             Email email,
             CPF cpf,
