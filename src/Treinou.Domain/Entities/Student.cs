@@ -4,7 +4,7 @@ using Treinou.Domain.ValueObjects;
 
 namespace Treinou.Domain.Entities
 {
-    public class Student : Entity
+    public class Student : AggregateRoot
     {
         private const int NAME_MAX_LENGTH = 200;
         private const int NAME_MIN_LENGTH = 3;
