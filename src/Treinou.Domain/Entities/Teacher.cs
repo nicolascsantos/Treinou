@@ -51,6 +51,8 @@ namespace Treinou.Domain.Entities
 
         public ICollection<Student> Students { get; } = new List<Student>();
 
+        public ICollection<Workout> Workouts { get; } = new List<Workout>();
+
         public void Validate()
         {
             DomainValidation.NotNullOrEmpty(Name, nameof(Name));

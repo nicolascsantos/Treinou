@@ -31,6 +31,8 @@ namespace Treinou.Domain.Entities
 
         public Teacher Teacher { get; set; } = null!;
 
+        public ICollection<Workout> Workouts { get; } = new List<Workout>();
+
         public Student(
             string name,
             Email email,
