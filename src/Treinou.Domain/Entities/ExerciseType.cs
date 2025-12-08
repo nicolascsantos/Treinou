@@ -3,7 +3,7 @@ using Treinou.Domain.Validation;
 
 namespace Treinou.Domain.Entities
 {
-    public class ExerciseType : Entity
+    public class ExerciseType : AggregateRoot
     {
         public ExerciseType(string name)
         {

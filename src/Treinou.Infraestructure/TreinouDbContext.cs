@@ -10,6 +10,10 @@ namespace Treinou.Infraestructure
 
         public DbSet<Teacher> Teachers => Set<Teacher>();
 
+        public DbSet<ExerciseType> ExerciseTypes => Set<ExerciseType>();
+
+        public DbSet<Workout> Workouts { get; set; }
+
         public TreinouDbContext(DbContextOptions<TreinouDbContext> options) : base(options)
         {
 
@@ -19,6 +23,8 @@ namespace Treinou.Infraestructure
         {
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new ExerciseTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkoutConfiguration());
         }
     }
 }
