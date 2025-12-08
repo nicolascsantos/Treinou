@@ -1,7 +1,7 @@
+using Treinou.Application.Adapters;
 using Treinou.Application.UseCases.Teacher.Common;
 using Treinou.Domain.Repository;
 using Treinou.Domain.SeedWork;
-using Treinou.Domain.ValueObjects;
 
 namespace Treinou.Application.UseCases.Teacher.CreateTeacher
 {
@@ -24,26 +24,14 @@ namespace Treinou.Application.UseCases.Teacher.CreateTeacher
             CancellationToken cancellationToken
         )
         {
-            var email = new Email(request.Email);
-            var cpf = new CPF(request.CPF);
-            var cref = new CREF(request.CREF);
-            var phoneNumber = new PhoneNumber(request.PhoneNumber);
-
-            var teacher = new Domain.Entities.Teacher(
-                request.Name,
-                email,
-                cpf,
-                cref,
-                request.Description,
-                phoneNumber,
-                request.BirthDate,
-                DateTime.Now
-            );
+            // Use Adapter Pattern to convert Input DTO to Domain Entity
+            var teacher = TeacherAdapter.ToEntity(request);
 
             await _teacherRepository.Insert(teacher, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 
-            return TeacherModelOutput.FromTeacher(teacher);
+            // Use Adapter Pattern to convert Domain Entity to Output DTO
+            return TeacherAdapter.ToOutput(teacher);
         }
     }
 }
