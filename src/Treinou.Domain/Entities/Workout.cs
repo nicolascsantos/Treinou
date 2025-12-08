@@ -15,6 +15,9 @@ namespace Treinou.Domain.Entities
 
         public bool IsActive { get; private set; }
 
+        private readonly List<WorkoutExercise> _exercises = new();
+        public IReadOnlyCollection<WorkoutExercise> Exercises => _exercises.AsReadOnly();
+
         public Workout(
             string name,
             Guid teacherId,
@@ -48,6 +51,15 @@ namespace Treinou.Domain.Entities
         public void Update(string name)
         {
             Name = name;
+        }
+
+        public void RemoveExercise(Guid exerciseId)
+        {
+            var exerciseToRemove = _exercises.Find(x => x.Id == exerciseId);
+
+            if (exerciseToRemove is null) return;
+
+            _exercises.Remove(exerciseToRemove);
         }
     }
 }
