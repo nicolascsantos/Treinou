@@ -12,6 +12,8 @@ namespace Treinou.Domain.Entities
 
         public string Name { get; set; }
 
+        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+
         public void Validate()
         {
             DomainValidation.NotNullOrEmpty(Name, nameof(Name));

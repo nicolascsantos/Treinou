@@ -53,6 +53,51 @@ namespace Treinou.Domain.Entities
             Name = name;
         }
 
+        public void AddExercise(
+            Guid exerciseId,
+            Exercise exercise,
+            int order,
+            int numberOfSets,
+            int numberOfRepetitions,
+            TimeSpan rest,
+            string notes = ""
+        )
+        {
+            var exerciseAlreadyExists = _exercises.Any(x => x.ExerciseId == exerciseId);
+
+            if (exerciseAlreadyExists)
+                throw new InvalidOperationException($"Exercise '{exerciseId}' already exists in this workout.");
+
+            var workoutExercise = new WorkoutExercise(
+                exerciseId,
+                exercise,
+                order,
+                numberOfSets,
+                numberOfRepetitions,
+                rest,
+                notes
+            );
+
+            _exercises.Add(workoutExercise);
+        }
+
+        public void UpdateExercise(
+            Guid workoutExerciseId,
+            int order,
+            int numberOfSets,
+            int numberOfRepetitions,
+            TimeSpan rest,
+            string? notes = null
+        )
+        {
+            var workoutExercise = _exercises.Find(x => x.Id == workoutExerciseId);
+
+            if (workoutExercise is null)
+                throw new InvalidOperationException($"WorkoutExercise '{workoutExerciseId}' not found in this workout.");
+
+            workoutExercise.Update(order, numberOfSets, numberOfRepetitions, rest, notes);
+        }
+
         public void RemoveExercise(Guid exerciseId)
         {
             var exerciseToRemove = _exercises.Find(x => x.Id == exerciseId);
