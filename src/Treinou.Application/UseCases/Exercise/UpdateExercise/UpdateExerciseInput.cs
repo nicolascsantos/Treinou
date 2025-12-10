@@ -10,5 +10,12 @@ namespace Treinou.Application.UseCases.Exercise.UpdateExercise
         public string Name { get; set; }
 
         public Guid ExerciseTypeId { get; set; }
+
+        public UpdateExerciseInput(Guid id, string name, Guid exerciseTypeId)
+        {
+            Id = id;
+            Name = name;
+            ExerciseTypeId = exerciseTypeId;
+        }
     }
 }
