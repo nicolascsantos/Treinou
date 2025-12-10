@@ -2,10 +2,11 @@
 using Treinou.Domain.Entities;
 using Treinou.Domain.Exceptions;
 using Treinou.Domain.Repository;
+using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.Infraestructure.Repositories
 {
-    public class TeacherRepository : ITeacherRepository
+    public class TeacherRepository : ITeacherRepository, ISearchableRepository<Teacher>
     {
         private readonly TreinouDbContext _context;
 
@@ -32,5 +33,15 @@ namespace Treinou.Infraestructure.Repositories
 
         public async Task Update(Teacher aggregate, CancellationToken cancellationToken)
             => _teachers.Update(aggregate);
+
+        public IQueryable<Teacher> AddOrderToQuery(IQueryable<Teacher> query, string propertyToOrderBy, SearchOrder order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SearchOutput<Teacher>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

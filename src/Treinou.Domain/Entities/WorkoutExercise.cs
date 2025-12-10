@@ -4,7 +4,7 @@ using Treinou.Domain.Validation;
 
 namespace Treinou.Domain.Entities
 {
-    public class WorkoutExercise : Entity
+    public class WorkoutExercise : AggregateRoot
     {
         public Guid ExerciseId { get; private set; }
 

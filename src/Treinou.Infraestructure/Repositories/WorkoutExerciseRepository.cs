@@ -2,10 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Treinou.Domain.Entities;
 using Treinou.Domain.Exceptions;
 using Treinou.Domain.Repository;
+using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.Infraestructure.Repositories
 {
-    public class WorkoutExerciseRepository : IWorkoutExerciseRepository
+    public class WorkoutExerciseRepository : IWorkoutExerciseRepository, ISearchableRepository<WorkoutExercise>
     {
         private readonly TreinouDbContext _context;
 
@@ -45,6 +46,11 @@ namespace Treinou.Infraestructure.Repositories
         {
             _workoutExercises.Remove(workoutExercise);
             return Task.CompletedTask;
+        }
+
+        public Task<SearchOutput<WorkoutExercise>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
