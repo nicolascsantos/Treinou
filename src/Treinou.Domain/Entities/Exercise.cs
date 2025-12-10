@@ -48,5 +48,13 @@ namespace Treinou.Domain.Entities
             DomainValidation.NotNullOrEmpty(Name, nameof(Name));
             DomainValidation.NotNull(ExcerciseTypeId, nameof(ExcerciseTypeId));
         }
+
+        public void Update(string name, Guid? exerciseTypeId, string? imageUrl)
+        {
+            Name = name;
+            ExcerciseTypeId = exerciseTypeId ?? ExcerciseTypeId;
+            ImageUrl = imageUrl ?? ImageUrl;
+            Validate();
+        }
     }
 }
