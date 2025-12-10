@@ -20,7 +20,7 @@ namespace Treinou.Application.UseCases.Student.ListStudent
         public static ListStudentsOutput FromSearchOutput(SearchOutput<Entity.Student> searchOutput)
         =>  new ListStudentsOutput(
                 searchOutput.Page,
-                searchOutput.CurrentPage,
+                searchOutput.PerPage,
                 searchOutput.Total,
                 searchOutput.Items.Select(StudentModelOutput.FromStudent).ToList()
         );

@@ -17,7 +17,7 @@ namespace Treinou.Application.UseCases.ExerciseType.ListExerciseTypes
         public static ListExerciseTypesOutput FromSearchOutput(SearchOutput<Entity.ExerciseType> searchOutput)
             => new ListExerciseTypesOutput(
                 searchOutput.Page,
-                searchOutput.CurrentPage,
+                searchOutput.PerPage,
                 searchOutput.Total,
                 searchOutput.Items
             );

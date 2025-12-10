@@ -4,7 +4,7 @@
     {
         public int Page { get; set; }
 
-        public int CurrentPage { get; set; }
+        public int PerPage { get; set; }
 
         public int Total { get; set; }
 
@@ -12,13 +12,13 @@
 
         public SearchOutput(
             int page,
-            int currentPage,
+            int perPage,
             int total,
             IReadOnlyList<TAggregate> items
         )
         {
             Page = page;
-            CurrentPage = currentPage;
+            PerPage = perPage;
             Total = total;
             Items = items;
         }
