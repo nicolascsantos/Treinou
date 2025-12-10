@@ -1,4 +1,6 @@
-﻿namespace Treinou.Domain.SeedWork
+﻿using Treinou.Domain.SeedWork.SearchableRepository;
+
+namespace Treinou.Domain.SeedWork
 {
     public interface IGenericRepository<TAggregate> : IRepository where TAggregate : AggregateRoot
     {
@@ -9,5 +11,6 @@
         public Task Delete(TAggregate aggregate, CancellationToken cancellationToken);
 
         public Task Update(TAggregate aggregate, CancellationToken cancellationToken);
+        IQueryable<TAggregate> AddOrderToQuery(IQueryable<TAggregate> query, string propertyToOrderBy, SearchOrder order);
     }
 }
