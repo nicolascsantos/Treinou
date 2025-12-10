@@ -36,14 +36,33 @@ namespace Treinou.Infraestructure.Repositories
         public async Task Update(ExerciseType aggregate, CancellationToken cancellationToken)
             => await Task.FromResult(_context.Update(aggregate));
 
-        public IQueryable<ExerciseType> AddOrderToQuery(IQueryable<ExerciseType> query, string propertyToOrderBy, SearchOrder order)
+        public async Task<SearchOutput<ExerciseType>> Search(SearchInput searchInput, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
+            var query = _exerciseTypes.AsNoTracking();
+            query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
+
+            if (!string.IsNullOrWhiteSpace(searchInput.Search))
+                query = query.Where(x => x.Name.Contains(searchInput.Search));
+            var total = await query.CountAsync();
+            var exerciseTypes = await query.Skip(toSkip)
+                .Take(searchInput.PerPage)
+                .ToListAsync(cancellationToken);
+
+            return new SearchOutput<ExerciseType>(
+                searchInput.Page,
+                searchInput.PerPage,
+                total,
+                exerciseTypes
+            );
         }
 
-        public Task<SearchOutput<ExerciseType>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+        public IQueryable<ExerciseType> AddOrderToQuery(IQueryable<ExerciseType> query, string propertyToOrderBy, SearchOrder order)
+        => (propertyToOrderBy.ToLower(), order) switch
         {
-            throw new NotImplementedException();
-        }
+            ("name", SearchOrder.ASCENDING) => query.OrderBy(x => x.Name),
+            ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Name),
+            _ => query.OrderBy(x => x.Name)
+        };
     }
 }
