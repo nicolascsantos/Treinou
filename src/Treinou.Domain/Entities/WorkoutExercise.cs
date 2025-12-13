@@ -23,7 +23,6 @@ namespace Treinou.Domain.Entities
 
         public WorkoutExercise(
             Guid exerciseId,
-            Exercise exercise,
             int order,
             int numberOfSets,
             int numberOfRepetitions,
@@ -32,7 +31,6 @@ namespace Treinou.Domain.Entities
         )
         {
             ExerciseId = exerciseId;
-            Exercise = exercise;
             Order = order;
             NumberOfSets = numberOfSets;
             NumberOfRepetitions = numberOfRepetitions;

@@ -76,7 +76,6 @@ namespace Treinou.Domain.Entities
 
             var workoutExercise = new WorkoutExercise(
                 exerciseId,
-                exercise,
                 order,
                 numberOfSets,
                 numberOfRepetitions,
