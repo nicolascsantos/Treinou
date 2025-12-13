@@ -4,12 +4,12 @@ using Treinou.Domain.SeedWork;
 
 namespace Treinou.Application.UseCases.WorkoutExercise.UpdateWorkoutExercise
 {
-    internal class UpdatWorkoutExercise : IUpdateWorkoutExercise
+    internal class UpdateWorkoutExercise : IUpdateWorkoutExercise
     {
         private readonly IWorkoutExerciseRepository _workoutExerciseRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdatWorkoutExercise(IWorkoutExerciseRepository workoutExerciseRepository, IUnitOfWork unitOfWork)
+        public UpdateWorkoutExercise(IWorkoutExerciseRepository workoutExerciseRepository, IUnitOfWork unitOfWork)
             => (_workoutExerciseRepository, _unitOfWork) = (workoutExerciseRepository, unitOfWork);
 
         public async Task<WorkoutExerciseModelOutput> Handle(UpdateWorkoutExerciseInput request, CancellationToken cancellationToken)
