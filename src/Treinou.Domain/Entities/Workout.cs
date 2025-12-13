@@ -48,9 +48,15 @@ namespace Treinou.Domain.Entities
             DomainValidation.NotNullOrEmpty(Name, nameof(Name));
         }
 
-        public void Update(string name)
+        public void Update(
+            string name,
+            Guid teacherId,
+            Guid studentId
+        )
         {
             Name = name;
+            TeacherId = teacherId;
+            StudentId = studentId; 
         }
 
         public void AddExercise(
