@@ -1,0 +1,6 @@
+@Treinou.API_HostAddress = http://localhost:5092
+
+GET {{Treinou.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
