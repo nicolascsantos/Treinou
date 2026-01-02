@@ -65,7 +65,7 @@ namespace Treinou.Domain.Entities
             DomainValidation.NotNull(CREF, nameof(CREF));
             DomainValidation.NotNullOrEmpty(Description, nameof(Description));
             DomainValidation.MinLength(Description, nameof(Description), DESCRIPTION_MIN_LENGTH);
-            DomainValidation.MinLength(Description, nameof(Description), DESCRIPTION_MAX_LENGTH);
+            DomainValidation.MaxLength(Description, nameof(Description), DESCRIPTION_MAX_LENGTH);
             DomainValidation.NotNull(PhoneNumber, nameof(PhoneNumber));
             DomainValidation.NotNull(BirthDate, nameof(BirthDate));
         }
