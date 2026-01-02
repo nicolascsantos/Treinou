@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="CLAUDE.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Treinou.API/Treinou.API.csproj" Id="3743850d-f6fe-4cd2-88fe-3321bac52f46" />
     <Project Path="src/Treinou.Application/Treinou.Application.csproj" Id="4c731ca1-b18f-421e-82f9-5c8c42f6267b" />
