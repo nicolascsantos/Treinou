@@ -59,7 +59,7 @@ namespace Treinou.Domain.Entities
         {
             DomainValidation.NotNullOrEmpty(Name, nameof(Name));
             DomainValidation.MinLength(Name, nameof(Name), NAME_MIN_LENGTH);
-            DomainValidation.MinLength(Name, nameof(Name), NAME_MAX_LENGTH);
+            DomainValidation.MaxLength(Name, nameof(Name), NAME_MAX_LENGTH);
             DomainValidation.NotNull(Email, nameof(Email));
             DomainValidation.NotNull(CPF, nameof(CPF));
             DomainValidation.NotNull(CREF, nameof(CREF));
