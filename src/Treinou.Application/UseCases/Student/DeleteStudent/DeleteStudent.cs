@@ -1,3 +1,4 @@
+using MediatR;
 using Treinou.Domain.Repository;
 using Treinou.Domain.SeedWork;
 
@@ -17,7 +18,7 @@ namespace Treinou.Application.UseCases.Student.DeleteStudent
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(
+        public async Task<Unit> Handle(
             DeleteStudentInput request,
             CancellationToken cancellationToken
         )
@@ -28,6 +29,7 @@ namespace Treinou.Application.UseCases.Student.DeleteStudent
             // Delete the student
             await _studentRepository.Delete(student, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
+            return await Task.FromResult(Unit.Value);
         }
     }
 }

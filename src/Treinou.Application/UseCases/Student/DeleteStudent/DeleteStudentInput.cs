@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Treinou.Application.UseCases.Student.DeleteStudent
 {
-    public class DeleteStudentInput : IRequest
+    public class DeleteStudentInput : IRequest<Unit>
     {
         public Guid Id { get; set; }
 
