@@ -23,7 +23,7 @@ namespace Treinou.Infraestructure.Repositories
 
         public async Task<Student> Get(Guid id, CancellationToken cancellationToken)
         {
-            var student = await _students.FindAsync(id);
+            var student = await _students.Include(x => x.Teacher).FirstOrDefaultAsync(x => x.Id == id);
             if (student is null) throw new NotFoundException($"Student '{id}' not found");
             return student;
 
