@@ -1,4 +1,6 @@
-﻿namespace Treinou.Application.UseCases.Student.Common
+﻿using Treinou.Application.DTOs;
+
+namespace Treinou.Application.UseCases.Student.Common
 {
     public class StudentModelOutput
     {
@@ -18,7 +20,7 @@
 
         public double Height { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public TeacherDTO Teacher { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -33,7 +35,7 @@
             DateTime birthDate,
             double weight,
             double height,
-            Guid teacherId,
+            TeacherDTO teacher,
             bool isActive,
             DateTime createdAt
         )
@@ -46,7 +48,7 @@
             BirthDate = birthDate;
             Weight = weight;
             Height = height;
-            TeacherId = teacherId;
+            Teacher = teacher;
             IsActive = isActive;
             CreatedAt = createdAt;
         }
@@ -62,7 +64,15 @@
                 student.BirthDate,
                 student.Weight,
                 student.Height,
-                student.TeacherId,
+                new TeacherDTO(
+                    student.Teacher.Id,
+                    student.Teacher.Name,
+                    student.Teacher.Email.Address,
+                    student.Teacher.CPF.Number,
+                    student.Teacher.CREF.Number,
+                    student.Teacher.Description,
+                    student.Teacher.PhoneNumber.Number,
+                    student.Teacher.BirthDate),
                 student.IsActive,
                 student.CreatedAt
             );
