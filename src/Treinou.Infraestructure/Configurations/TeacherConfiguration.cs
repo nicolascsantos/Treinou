@@ -38,6 +38,11 @@ namespace Treinou.Infraestructure.Configurations
                 .OwnsOne(x => x.PhoneNumber)
                 .Property(x => x.Number)
                 .HasColumnName("PhoneNumber");
+
+            teachersConfiguration
+                .OwnsOne(x => x.CREF)
+                .Property(x => x.Number)
+                .HasColumnName("CREF");
         }
     }
 }

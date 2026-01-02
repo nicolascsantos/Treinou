@@ -54,6 +54,7 @@ namespace Treinou.Domain.Entities
             Validate();
         }
 
+        public Student() {}
 
         public void Validate()
         {

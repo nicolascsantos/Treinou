@@ -33,6 +33,8 @@ namespace Treinou.Domain.Entities
             Validate();
         }
 
+        public Teacher() {}
+
         public string Name { get; set; }
 
         public Email Email { get; set; }

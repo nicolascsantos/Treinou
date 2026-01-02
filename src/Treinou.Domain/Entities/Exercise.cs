@@ -31,6 +31,8 @@ namespace Treinou.Domain.Entities
             Validate();
         }
 
+        public Exercise() {}
+
         public void Activate()
         {
             IsActive = true;

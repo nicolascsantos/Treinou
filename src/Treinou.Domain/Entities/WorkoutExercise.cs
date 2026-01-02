@@ -20,6 +20,10 @@ namespace Treinou.Domain.Entities
 
         public string Notes { get; private set; }
 
+        public Guid WorkoutId { get; set; }
+
+        public Workout Workout { get; set; } = null!;
+
 
         public WorkoutExercise(
             Guid exerciseId,
