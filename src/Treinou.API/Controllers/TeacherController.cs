@@ -5,6 +5,7 @@ using Treinou.Application.UseCases.Teacher.Common;
 using Treinou.Application.UseCases.Teacher.CreateTeacher;
 using Treinou.Application.UseCases.Teacher.DeleteTeacher;
 using Treinou.Application.UseCases.Teacher.GetTeacher;
+using Treinou.Application.UseCases.Teacher.UpdateTeacher;
 
 namespace Treinou.API.Controllers
 {
@@ -45,6 +46,14 @@ namespace Treinou.API.Controllers
         {
             var output = await _mediator.Send(new DeleteTeacherInput(id), cancellationToken);
             return NoContent();
+        }
+
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<TeacherModelOutput>))]
+        [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Update([FromBody] UpdateTeacherInput input, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(input, cancellationToken);
+            return Ok(new APIResponse<TeacherModelOutput>(output));
         }
     }
 }
