@@ -48,6 +48,7 @@ namespace Treinou.API.Controllers
             return NoContent();
         }
 
+        [HttpPut]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<TeacherModelOutput>))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Update([FromBody] UpdateTeacherInput input, CancellationToken cancellationToken)
