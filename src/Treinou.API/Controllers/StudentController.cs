@@ -6,6 +6,7 @@ using Treinou.Application.UseCases.Student.CreateStudent;
 using Treinou.Application.UseCases.Student.DeleteStudent;
 using Treinou.Application.UseCases.Student.GetStudent;
 using Treinou.Application.UseCases.Student.ListStudent;
+using Treinou.Application.UseCases.Student.UpdateStudent;
 using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.API.Controllers
@@ -69,6 +70,15 @@ namespace Treinou.API.Controllers
             var output = await _mediator.Send(input, cancellationToken);
 
             return Ok(new APIResponseList<StudentModelOutput>(output));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<StudentModelOutput>))]
+        [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Update([FromBody] UpdateStudentInput input, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(input, cancellationToken);
+            return Ok(new APIResponse<StudentModelOutput>(output));
         }
     }
 }
