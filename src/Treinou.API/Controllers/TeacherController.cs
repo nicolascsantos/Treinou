@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Treinou.API.Models;
 using Treinou.Application.UseCases.Teacher.Common;
 using Treinou.Application.UseCases.Teacher.CreateTeacher;
+using Treinou.Application.UseCases.Teacher.DeleteTeacher;
 using Treinou.Application.UseCases.Teacher.GetTeacher;
 
 namespace Treinou.API.Controllers
@@ -35,6 +36,15 @@ namespace Treinou.API.Controllers
         {
             var output = await _mediator.Send(input, cancellationToken);
             return CreatedAtAction(nameof(Create), new { output.Id }, new APIResponse<TeacherModelOutput>(output));
+        }
+
+        [HttpDelete("{id::guid}")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(void))]
+        [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(new DeleteTeacherInput(id), cancellationToken);
+            return NoContent();
         }
     }
 }
