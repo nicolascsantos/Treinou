@@ -5,7 +5,9 @@ using Treinou.Application.UseCases.Teacher.Common;
 using Treinou.Application.UseCases.Teacher.CreateTeacher;
 using Treinou.Application.UseCases.Teacher.DeleteTeacher;
 using Treinou.Application.UseCases.Teacher.GetTeacher;
+using Treinou.Application.UseCases.Teacher.ListTeachers;
 using Treinou.Application.UseCases.Teacher.UpdateTeacher;
+using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.API.Controllers
 {
@@ -55,6 +57,30 @@ namespace Treinou.API.Controllers
         {
             var output = await _mediator.Send(input, cancellationToken);
             return Ok(new APIResponse<TeacherModelOutput>(output));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<TeacherModelOutput>))]
+        public async Task<IActionResult> List(
+            CancellationToken cancellationToken,
+            [FromQuery] int? page = null,
+            [FromQuery(Name = "per_page")] int? perPage = null,
+            [FromQuery] string? search = null,
+            [FromQuery] string? sort = null,
+            [FromQuery] SearchOrder? dir = null
+        )
+        {
+            var input = new ListTeachersInput();
+
+            if (page is not null) input.Page = page.Value;
+            if (perPage is not null) input.PerPage = perPage.Value;
+            if (!string.IsNullOrWhiteSpace(search)) input.Search = search;
+            if (!string.IsNullOrWhiteSpace(sort)) input.Sort = sort;
+            if (dir is not null) input.Dir = dir.Value;
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            return Ok(new APIResponseList<TeacherModelOutput>(output));
         }
     }
 }

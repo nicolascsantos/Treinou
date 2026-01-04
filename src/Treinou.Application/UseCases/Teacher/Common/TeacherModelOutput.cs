@@ -1,3 +1,5 @@
+using Treinou.Application.DTOs;
+
 namespace Treinou.Application.UseCases.Teacher.Common
 {
     public class TeacherModelOutput
@@ -20,6 +22,8 @@ namespace Treinou.Application.UseCases.Teacher.Common
 
         public DateTime CreatedAt { get; set; }
 
+        public List<StudentDTO> Students { get; set; }
+
         public TeacherModelOutput(
             Guid id,
             string name,
@@ -29,7 +33,8 @@ namespace Treinou.Application.UseCases.Teacher.Common
             string description,
             string phoneNumber,
             DateTime birthDate,
-            DateTime createdAt
+            DateTime createdAt,
+            List<StudentDTO> students
         )
         {
             Id = id;
@@ -41,10 +46,32 @@ namespace Treinou.Application.UseCases.Teacher.Common
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
             CreatedAt = createdAt;
+            Students = students;
         }
 
         public static TeacherModelOutput FromTeacher(Domain.Entities.Teacher teacher)
         {
+            List<StudentDTO> students = new List<StudentDTO>();
+            if (teacher.Students.Count > 0)
+            {
+                foreach (var student in teacher.Students)
+                {
+                    students.Add(new StudentDTO(
+                        student.Id,
+                        student.Name,
+                        student.Email.Address,
+                        student.CPF.Number,
+                        student.PhoneNumber.Number,
+                        student.BirthDate,
+                        student.Weight,
+                        student.Height,
+                        student.IsActive,
+                        student.CreatedAt,
+                        student.TeacherId
+                    ));
+                }
+            }
+
             return new TeacherModelOutput(
                 teacher.Id,
                 teacher.Name,
@@ -54,8 +81,9 @@ namespace Treinou.Application.UseCases.Teacher.Common
                 teacher.Description,
                 teacher.PhoneNumber.Number,
                 teacher.BirthDate,
-                teacher.CreatedAt
-            );
+                teacher.CreatedAt,
+                students
+                );
         }
     }
 }
