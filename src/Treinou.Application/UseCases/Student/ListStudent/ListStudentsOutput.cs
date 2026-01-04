@@ -15,7 +15,7 @@ namespace Treinou.Application.UseCases.Student.ListStudent
         ) : base(page, perPage, total, items)
         {
             
-        } 
+        }
 
         public static ListStudentsOutput FromSearchOutput(SearchOutput<Entity.Student> searchOutput)
         =>  new ListStudentsOutput(

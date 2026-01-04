@@ -19,7 +19,7 @@ namespace Treinou.Application.Common
         )
         {
             Page = page;
-            PerPage = PerPage;
+            PerPage = perPage;
             Search = search;
             Sort = sort;
             Dir = dir;
