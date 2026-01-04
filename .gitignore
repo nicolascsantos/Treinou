@@ -3,6 +3,8 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# bruno excludes
+/api-collection
 
 # dotenv files
 .env
