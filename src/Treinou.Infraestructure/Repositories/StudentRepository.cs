@@ -30,8 +30,13 @@ namespace Treinou.Infraestructure.Repositories
         }
 
         public async Task Insert(Student aggregate, CancellationToken cancellationToken)
-            => await _students.AddAsync(aggregate);
+        {
 
+            if (await Exists(aggregate, cancellationToken))
+                throw new EntityValidationException("Student already exists.");
+
+            await _students.AddAsync(aggregate, cancellationToken);
+        }
 
         public async Task Update(Student aggregate, CancellationToken cancellationToken)
             => await Task.FromResult(_context.Update(aggregate));
@@ -76,5 +81,12 @@ namespace Treinou.Infraestructure.Repositories
                 ("height", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Height),
                 _ => query.OrderBy(x => x.Name)
             };
+
+        public async Task<bool> Exists(Student student, CancellationToken cancellationToken)
+            => await _students.AsNoTracking()
+            .AnyAsync(
+                x => x.CPF.Number == student.CPF.Number &&
+                x.Email.Address == student.Email.Address
+            , cancellationToken);
     }
 }

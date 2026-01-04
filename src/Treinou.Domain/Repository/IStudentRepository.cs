@@ -6,6 +6,6 @@ namespace Treinou.Domain.Repository
 {
     public interface IStudentRepository : ISearchableRepository<Student>, IGenericRepository<Student>
     {
-
+        public Task<bool> Exists(Student student, CancellationToken cancellationToken); 
     }
 }
