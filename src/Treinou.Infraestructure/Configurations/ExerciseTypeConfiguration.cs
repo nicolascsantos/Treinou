@@ -9,6 +9,7 @@ namespace Treinou.Infraestructure.Configurations
         public void Configure(EntityTypeBuilder<ExerciseType> exerciseTypeConfiguration)
         {
             exerciseTypeConfiguration.HasKey(x => x.Id);
+            exerciseTypeConfiguration.HasIndex(x => x.Name).IsUnique();
             exerciseTypeConfiguration.Property(x => x.Name).IsRequired();
         }
     }
