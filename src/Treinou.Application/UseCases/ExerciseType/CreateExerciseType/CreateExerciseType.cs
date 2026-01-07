@@ -25,8 +25,6 @@ namespace Treinou.Application.UseCases.ExerciseType.CreateExerciseType
         {
             var exerciseType = new Domain.Entities.ExerciseType(request.Name);
 
-            exerciseType.Validate();
-
             await _exerciseTypeRepository.Insert(exerciseType, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 

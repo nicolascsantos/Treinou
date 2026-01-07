@@ -8,6 +8,7 @@ namespace Treinou.Domain.Entities
         public ExerciseType(string name)
         {
             Name = name;
+            Validate();
         }
 
         public string Name { get; set; }
