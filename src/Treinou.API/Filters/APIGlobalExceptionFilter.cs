@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EntityFramework.Exceptions.Common;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Treinou.Domain.Exceptions;
 
@@ -35,6 +36,14 @@ namespace Treinou.API.Filters
                 details.Status = StatusCodes.Status404NotFound;
                 details.Detail = ex!.Message;
                 details.Type = "NotFound";
+            }
+            else if (exception is UniqueConstraintException)
+            {
+                var ex = exception as UniqueConstraintException;
+                details.Title = "One or more validation errors occurred.";
+                details.Status = StatusCodes.Status409Conflict;
+                details.Detail = ex!.Message;
+                details.Type = "Conflict";
             }
             //else if (exception is RelatedAggregateException)
             //{

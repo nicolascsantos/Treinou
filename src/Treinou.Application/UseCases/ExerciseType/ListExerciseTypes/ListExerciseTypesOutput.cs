@@ -1,6 +1,7 @@
 ﻿using Treinou.Application.Common;
 using Treinou.Application.UseCases.ExerciseType.Common;
 using Treinou.Domain.SeedWork.SearchableRepository;
+using Entity = Treinou.Domain.Entities;
 
 namespace Treinou.Application.UseCases.ExerciseType.ListExerciseTypes
 {
@@ -14,12 +15,12 @@ namespace Treinou.Application.UseCases.ExerciseType.ListExerciseTypes
         ) : base(page, perPage, total, items)
         { }
 
-        public static ListExerciseTypesOutput FromSearchOutput(SearchOutput<ExerciseTypeModelOutput> searchOutput)
+        public static ListExerciseTypesOutput FromSearchOutput(SearchOutput<Entity.ExerciseType> searchOutput)
             => new ListExerciseTypesOutput(
                 searchOutput.Page,
                 searchOutput.PerPage,
                 searchOutput.Total,
-                searchOutput.Items
+                searchOutput.Items.Select(ExerciseTypeModelOutput.FromExerciseType).ToList()
             );
     }
 }

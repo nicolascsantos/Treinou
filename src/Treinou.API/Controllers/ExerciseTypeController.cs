@@ -35,6 +35,7 @@ namespace Treinou.API.Controllers
         [HttpPost]
         [ProducesResponseType(201, StatusCode = StatusCodes.Status201Created, Type = typeof(APIResponse<ExerciseTypeModelOutput>))]
         [ProducesResponseType(422, StatusCode = StatusCodes.Status422UnprocessableEntity, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(409, StatusCode = StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Create([FromBody] CreateExerciseTypeInput input, CancellationToken cancellationToken)
         {
             var output = await _mediator.Send(input, cancellationToken);

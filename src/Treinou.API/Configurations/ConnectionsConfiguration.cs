@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EntityFramework.Exceptions.SqlServer;
+using Microsoft.EntityFrameworkCore;
 using Treinou.Infraestructure;
 
 namespace Treinou.API.Configurations
@@ -14,7 +15,8 @@ namespace Treinou.API.Configurations
         private static IServiceCollection AddDbConnection(this IServiceCollection services, IConfiguration configuration) 
         {
             var connectionString = configuration.GetConnectionString("TreinouDb") ?? string.Empty;
-            services.AddDbContext<TreinouDbContext>(x => x.UseSqlServer(connectionString));
+            services.AddDbContext<TreinouDbContext>(x => x.UseSqlServer(connectionString)
+                .UseExceptionProcessor());
             return services;
         }
     }
