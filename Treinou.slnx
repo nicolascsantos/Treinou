@@ -4,6 +4,9 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Treinou.API/Treinou.API.csproj" Id="3743850d-f6fe-4cd2-88fe-3321bac52f46" />
+    <Project Path="src/Treinou.APP/Treinou.APP.csproj" Id="a026e9a9-c11a-4115-866c-ce4cdc2be458">
+      <Deploy Solution="Debug|*" />
+    </Project>
     <Project Path="src/Treinou.Application/Treinou.Application.csproj" Id="4c731ca1-b18f-421e-82f9-5c8c42f6267b" />
     <Project Path="src/Treinou.Console/Treinou.Console.csproj" Id="f621da85-f843-40e2-a7e6-404072724b15" />
     <Project Path="src/Treinou.Domain/Treinou.Domain.csproj" Id="f781a180-a27c-45b4-98b1-aae3c0cbf185" />
