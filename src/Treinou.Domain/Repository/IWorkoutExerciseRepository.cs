@@ -1,5 +1,6 @@
 using Treinou.Domain.Entities;
 using Treinou.Domain.SeedWork;
+using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.Domain.Repository
 {
@@ -8,7 +9,7 @@ namespace Treinou.Domain.Repository
     /// Note: WorkoutExercise is not an AggregateRoot, so this repository
     /// provides specific operations instead of extending IGenericRepository.
     /// </summary>
-    public interface IWorkoutExerciseRepository : IRepository
+    public interface IWorkoutExerciseRepository : IRepository, ISearchableRepository<WorkoutExercise>
     {
         Task Insert(WorkoutExercise workoutExercise, CancellationToken cancellationToken);
 

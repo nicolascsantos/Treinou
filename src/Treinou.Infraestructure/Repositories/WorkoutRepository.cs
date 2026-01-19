@@ -37,12 +37,12 @@ namespace Treinou.Infraestructure.Repositories
             => await Task.FromResult(_context.Update(aggregate));
 
         public IQueryable<Workout> AddOrderToQuery(IQueryable<Workout> query, string propertyToOrderBy, SearchOrder order)
-        => (propertyToOrderBy.ToLower(), order) switch
-        {
-            ("name", SearchOrder.ASCENDING) => query.OrderBy(x => x.Name),
-            ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Name),
-            _ => query.OrderBy(x => x.Name)
-        };
+            => (propertyToOrderBy.ToLower(), order) switch
+            {
+                ("name", SearchOrder.ASCENDING) => query.OrderBy(x => x.Name),
+                ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Name),
+                _ => query.OrderBy(x => x.Name)
+            };
 
 
         public async Task<SearchOutput<Workout>> Search(SearchInput searchInput, CancellationToken cancellationToken)

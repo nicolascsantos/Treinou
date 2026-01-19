@@ -6,7 +6,7 @@ using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.Infraestructure.Repositories
 {
-    public class WorkoutExerciseRepository : IWorkoutExerciseRepository, ISearchableRepository<WorkoutExercise>
+    public class WorkoutExerciseRepository : IWorkoutExerciseRepository
     {
         private readonly TreinouDbContext _context;
 
@@ -48,9 +48,33 @@ namespace Treinou.Infraestructure.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<SearchOutput<WorkoutExercise>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+        public async Task<SearchOutput<WorkoutExercise>> Search(SearchInput searchInput, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
+            var query = _workoutExercises.AsNoTracking().AsQueryable();
+            query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
+
+            if (!string.IsNullOrWhiteSpace(searchInput.Search))
+                query = query.Where(x => x.Workout.Name.Contains(searchInput.Search));
+            var total = await query.CountAsync();
+            var workoutExercises = await query.Skip(toSkip)
+                .Take(searchInput.PerPage)
+                .ToListAsync(cancellationToken);
+
+            return new SearchOutput<WorkoutExercise>(
+                searchInput.Page,
+                searchInput.PerPage,
+                total,
+                workoutExercises
+            );
         }
+
+        public IQueryable<WorkoutExercise> AddOrderToQuery(IQueryable<WorkoutExercise> query, string propertyToOrderBy, SearchOrder order)
+            => (propertyToOrderBy.ToLower(), order) switch
+            {
+                ("name", SearchOrder.ASCENDING) => query.OrderBy(x => x.Workout.Name),
+                ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Workout.Name),
+                _ => query.OrderBy(x => x.Id)
+            };
     }
 }
