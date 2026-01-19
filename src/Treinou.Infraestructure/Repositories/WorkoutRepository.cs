@@ -37,8 +37,33 @@ namespace Treinou.Infraestructure.Repositories
             => await Task.FromResult(_context.Update(aggregate));
 
         public IQueryable<Workout> AddOrderToQuery(IQueryable<Workout> query, string propertyToOrderBy, SearchOrder order)
+        => (propertyToOrderBy.ToLower(), order) switch
         {
-            throw new NotImplementedException();
+            ("name", SearchOrder.ASCENDING) => query.OrderBy(x => x.Name),
+            ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Name),
+            _ => query.OrderBy(x => x.Name)
+        };
+
+
+        public async Task<SearchOutput<Workout>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+        {
+            var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
+            var query = _workouts.AsNoTracking().AsQueryable();
+            query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
+
+            if (!string.IsNullOrWhiteSpace(searchInput.Search))
+                query = query.Where(x => x.Name.Contains(searchInput.Search));
+            var total = await query.CountAsync();
+            var workouts = await query.Skip(toSkip)
+                .Take(searchInput.PerPage)
+                .ToListAsync(cancellationToken);
+
+            return new SearchOutput<Workout>(
+                searchInput.Page,
+                searchInput.PerPage,
+                total,
+                workouts
+            );
         }
     }
 }
