@@ -1,3 +1,6 @@
+
+using Treinou.Application.DTOs;
+
 namespace Treinou.Application.UseCases.Workout.Common
 {
     public class WorkoutModelOutput
@@ -6,24 +9,24 @@ namespace Treinou.Application.UseCases.Workout.Common
 
         public string Name { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public TeacherDTO Teacher { get; set; }
 
-        public Guid StudentId { get; set; }
+        public StudentDTO Student { get; set; }
 
         public bool IsActive { get; set; }
 
         public WorkoutModelOutput(
             Guid id,
             string name,
-            Guid teacherId,
-            Guid studentId,
+            TeacherDTO teacher,
+            StudentDTO student,
             bool isActive
         )
         {
             Id = id;
             Name = name;
-            TeacherId = teacherId;
-            StudentId = studentId;
+            Teacher = teacher;
+            Student = student;
             IsActive = isActive;
         }
 
@@ -32,8 +35,8 @@ namespace Treinou.Application.UseCases.Workout.Common
             return new WorkoutModelOutput(
                 workout.Id,
                 workout.Name,
-                workout.TeacherId,
-                workout.StudentId,
+                TeacherDTO.FromTeacher(workout.Teacher),
+                StudentDTO.FromStudent(workout.Student),
                 workout.IsActive
             );
         }

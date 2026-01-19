@@ -1,4 +1,6 @@
-﻿namespace Treinou.Application.DTOs
+﻿using Entity = Treinou.Domain.Entities;
+
+namespace Treinou.Application.DTOs
 {
     public sealed class TeacherDTO
     {
@@ -38,5 +40,17 @@
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
         }
+
+        public static TeacherDTO FromTeacher(Entity.Teacher teacher)
+            => new(
+                teacher.Id,
+                teacher.Name,
+                teacher.Email.Address,
+                teacher.CPF.Number,
+                teacher.CREF.Number,
+                teacher.Description,
+                teacher.PhoneNumber.Number,
+                teacher.BirthDate
+            );
     }
 }
