@@ -23,7 +23,10 @@ namespace Treinou.Infraestructure.Repositories
 
         public async Task<Exercise> Get(Guid id, CancellationToken cancellationToken)
         {
-            var exercise = await _exercises.FindAsync(id);
+            var exercise = await _exercises
+                .Include(x => x.ExcerciseType)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (exercise is null)
                 throw new NotFoundException($"Exercise '{id}' not found.");
@@ -40,7 +43,7 @@ namespace Treinou.Infraestructure.Repositories
         public async Task<SearchOutput<Exercise>> Search(SearchInput searchInput, CancellationToken cancellationToken)
         {
             var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
-            var query = _exercises.AsNoTracking();
+            var query = _exercises.AsNoTracking().Include(x => x.ExcerciseType).AsQueryable();
             query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
 
             if (!string.IsNullOrWhiteSpace(searchInput.Search))

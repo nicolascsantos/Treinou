@@ -1,3 +1,5 @@
+using Treinou.Application.DTOs;
+
 namespace Treinou.Application.UseCases.Exercise.Common
 {
     public class ExerciseModelOutput
@@ -8,7 +10,7 @@ namespace Treinou.Application.UseCases.Exercise.Common
 
         public string? ImageUrl { get; set; }
 
-        public Guid ExerciseTypeId { get; set; }
+        public ExerciseTypeDTO? ExerciseType { get; set; } = null;
 
         public bool IsActive { get; set; }
 
@@ -18,7 +20,7 @@ namespace Treinou.Application.UseCases.Exercise.Common
             Guid id,
             string name,
             string? imageUrl,
-            Guid exerciseTypeId,
+            ExerciseTypeDTO exerciseType,
             bool isActive,
             DateTime createdAt
         )
@@ -26,7 +28,7 @@ namespace Treinou.Application.UseCases.Exercise.Common
             Id = id;
             Name = name;
             ImageUrl = imageUrl;
-            ExerciseTypeId = exerciseTypeId;
+            ExerciseType = exerciseType;
             IsActive = isActive;
             CreatedAt = createdAt;
         }
@@ -37,7 +39,7 @@ namespace Treinou.Application.UseCases.Exercise.Common
                 exercise.Id,
                 exercise.Name,
                 exercise.ImageUrl,
-                exercise.ExcerciseTypeId,
+                ExerciseTypeDTO.FromExerciseType(exercise.ExcerciseType) ?? null,
                 exercise.IsActive,
                 exercise.CreatedAt
             );
