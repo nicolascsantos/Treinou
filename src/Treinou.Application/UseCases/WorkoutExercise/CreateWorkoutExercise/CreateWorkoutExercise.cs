@@ -19,6 +19,7 @@ namespace Treinou.Application.UseCases.WorkoutExercise.CreateWorkoutExercise
         public async Task<WorkoutExerciseModelOutput> Handle(CreateWorkoutExerciseInput request, CancellationToken cancellationToken)
         {
             var workoutExercise = new Entity.WorkoutExercise(
+                request.WorkoutId,
                 request.ExerciseId,
                 request.Order,
                 request.NumberOfSets,

@@ -5,6 +5,8 @@ namespace Treinou.Application.UseCases.WorkoutExercise.CreateWorkoutExercise
 {
     public class CreateWorkoutExerciseInput : IRequest<WorkoutExerciseModelOutput>
     {
+        public Guid WorkoutId { get; set; }
+
         public Guid ExerciseId { get; private set; }
 
         public int Order { get; private set; }
@@ -18,6 +20,7 @@ namespace Treinou.Application.UseCases.WorkoutExercise.CreateWorkoutExercise
         public string Notes { get; private set; }
 
         public CreateWorkoutExerciseInput(
+            Guid workoutId,
             Guid exerciseId,
             int order,
             int numberOfSets,
@@ -26,6 +29,7 @@ namespace Treinou.Application.UseCases.WorkoutExercise.CreateWorkoutExercise
             string notes
         )
         {
+            WorkoutId = workoutId;
             ExerciseId = exerciseId;
             Order = order;
             NumberOfSets = numberOfSets;

@@ -26,6 +26,7 @@ namespace Treinou.Domain.Entities
 
 
         public WorkoutExercise(
+            Guid workoutId,
             Guid exerciseId,
             int order,
             int numberOfSets,
@@ -34,6 +35,7 @@ namespace Treinou.Domain.Entities
             string notes
         )
         {
+            WorkoutId = workoutId;
             ExerciseId = exerciseId;
             Order = order;
             NumberOfSets = numberOfSets;
