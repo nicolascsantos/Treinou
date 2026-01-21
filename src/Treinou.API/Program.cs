@@ -16,6 +16,8 @@ app.MapOpenApi();
 
 app.UseHttpsRedirection();
 
+app.UseRateLimiter();
+
 app.UseAuthorization();
 
 app.MapControllers();

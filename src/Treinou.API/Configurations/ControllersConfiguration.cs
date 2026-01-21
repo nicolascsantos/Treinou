@@ -1,4 +1,5 @@
-﻿using Treinou.API.Configurations.Policies;
+﻿using System.Threading.RateLimiting;
+using Treinou.API.Configurations.Policies;
 using Treinou.API.Filters;
 
 namespace Treinou.API.Configurations
@@ -7,6 +8,20 @@ namespace Treinou.API.Configurations
     {
         public static IServiceCollection AddAndConfigureControllers(this IServiceCollection services)
         {
+            services.AddRateLimiter(options =>
+            {
+                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+                        factory: _ => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 4,
+                            Window = TimeSpan.FromSeconds(10),
+                            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                            QueueLimit = 0
+                        }));
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+            });
             services.AddControllers(options =>
                 options.Filters.Add(typeof(APIGlobalExceptionFilter)))
                     .AddJsonOptions(x => x.JsonSerializerOptions.PropertyNamingPolicy = new JsonSnakeCasePolicy());
