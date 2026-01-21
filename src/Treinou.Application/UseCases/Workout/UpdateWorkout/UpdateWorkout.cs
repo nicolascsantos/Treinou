@@ -24,28 +24,10 @@ namespace Treinou.Application.UseCases.Workout.UpdateWorkout
                 request.StudentId
             );
 
-            AddExercises(request, workoutToBeUpdated);
-
             await _workoutRepository.Update(workoutToBeUpdated, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 
             return WorkoutModelOutput.FromWorkout(workoutToBeUpdated);
-        }
-
-        private static void AddExercises(UpdateWorkoutInput request, Domain.Entities.Workout workoutToBeUpdated)
-        {
-            if (request.Exercises.Count > 0)
-            {
-                request.Exercises.ForEach(exercise => workoutToBeUpdated.AddExercise(
-                    exercise.Id,
-                    exercise.Exercise,
-                    exercise.Order,
-                    exercise.NumberOfSets,
-                    exercise.NumberOfRepetitions,
-                    exercise.Rest,
-                    exercise.Notes
-                ));
-            }
         }
     }
 }
