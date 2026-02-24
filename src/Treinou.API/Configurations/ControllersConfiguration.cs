@@ -1,6 +1,8 @@
-﻿using System.Threading.RateLimiting;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.RateLimiting;
 using Treinou.API.Configurations.Policies;
 using Treinou.API.Filters;
+using Treinou.Infraestructure.Identity;
 
 namespace Treinou.API.Configurations
 {

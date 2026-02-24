@@ -1,4 +1,5 @@
 using Treinou.API.Configurations;
+using Treinou.Infraestructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAndConfigureControllers();
 builder.Services.AddUseCases();
 builder.Services.AddAppConnections(builder.Configuration);
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+    .AddEntityFrameworkStores<AuthDbContext>();
 
 var app = builder.Build();
 
@@ -18,6 +21,9 @@ app.UseHttpsRedirection();
 
 app.UseRateLimiter();
 
+app.MapIdentityApi<ApplicationUser>();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
