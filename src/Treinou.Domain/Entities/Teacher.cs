@@ -89,5 +89,8 @@ namespace Treinou.Domain.Entities
             PhoneNumber = phoneNumber;
             Validate();
         }
+
+        public void AddStudent(Student student)
+            => Students.Add(student);
     }
 }

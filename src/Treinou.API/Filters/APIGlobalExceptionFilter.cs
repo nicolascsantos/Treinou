@@ -1,6 +1,8 @@
 ﻿using EntityFramework.Exceptions.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics.Eventing.Reader;
+using System.Security.Authentication;
 using Treinou.Domain.Exceptions;
 
 namespace Treinou.API.Filters
@@ -44,6 +46,13 @@ namespace Treinou.API.Filters
                 details.Status = StatusCodes.Status409Conflict;
                 details.Detail = ex!.Message;
                 details.Type = "Conflict";
+            }
+            else if (exception is AuthenticationException)
+            {
+                details.Title = "An unexpected error occured.";
+                details.Status = StatusCodes.Status422UnprocessableEntity;
+                details.Type = "UnexpectedError";
+                details.Detail = $"Message: {exception.Message};InnerException: {exception.InnerException?.Message}";
             }
             //else if (exception is RelatedAggregateException)
             //{
