@@ -24,6 +24,7 @@ namespace Treinou.Application.Adapters
             );
 
             student.TeacherId = input.TeacherId;
+            student.UserId = input.UserId;
 
             return student;
         }

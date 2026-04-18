@@ -26,8 +26,10 @@ namespace Treinou.Application.DTOs
 
         public Guid TeacherId { get; private set; }
 
+        public string? UserId { get; private set; }
+
         public StudentDTO(
-            Guid id, 
+            Guid id,
             string name,
             string email,
             string cpf,
@@ -37,7 +39,8 @@ namespace Treinou.Application.DTOs
             double height,
             bool isActive,
             DateTime createdAt,
-            Guid teacherId
+            Guid teacherId,
+            string? userId
         )
         {
             Id = id;
@@ -51,6 +54,7 @@ namespace Treinou.Application.DTOs
             IsActive = isActive;
             CreatedAt = createdAt;
             TeacherId = teacherId;
+            UserId = userId;
         }
 
         public static StudentDTO FromStudent(Student student)
@@ -65,7 +69,8 @@ namespace Treinou.Application.DTOs
                 student.Height,
                 student.IsActive,
                 student.CreatedAt,
-                student.TeacherId
+                student.TeacherId,
+                student.UserId
             );
     }
 }

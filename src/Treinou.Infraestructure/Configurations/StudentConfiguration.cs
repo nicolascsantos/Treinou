@@ -42,7 +42,12 @@ namespace Treinou.Infraestructure.Configurations
             studentConfiguration.Property(x => x.Height)
                 .IsRequired();
 
+            studentConfiguration.Property(x => x.UserId)
+                .IsRequired(false);
 
+            studentConfiguration.HasIndex(x => x.UserId)
+                .IsUnique()
+                .HasFilter("[UserId] IS NOT NULL");
         }
     }
 }

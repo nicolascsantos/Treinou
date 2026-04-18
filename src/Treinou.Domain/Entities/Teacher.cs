@@ -51,6 +51,8 @@ namespace Treinou.Domain.Entities
 
         public DateTime CreatedAt { get; set; }
 
+        public string? UserId { get; set; }
+
         public ICollection<Student> Students { get; } = new List<Student>();
 
         public ICollection<Workout> Workouts { get; } = new List<Workout>();

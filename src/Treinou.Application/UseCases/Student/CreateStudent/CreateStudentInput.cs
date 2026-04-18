@@ -23,6 +23,8 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
 
         public bool IsActive { get; set; } = true;
 
+        public string? UserId { get; set; }
+
         public CreateStudentInput(
             string name,
             string email,
@@ -32,7 +34,8 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
             double weight,
             double height,
             Guid teacherId,
-            bool isActive = true
+            bool isActive = true,
+            string? userId = null
         )
         {
             Name = name;
@@ -44,6 +47,7 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
             Height = height;
             TeacherId = teacherId;
             IsActive = isActive;
+            UserId = userId;
         }
     }
 }

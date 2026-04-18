@@ -19,6 +19,8 @@ namespace Treinou.Application.UseCases.Student.UpdateStudent
 
         public double Height { get; set; }
 
+        public string? UserId { get; set; }
+
         public UpdateStudentInput(
             Guid id,
             string name,
@@ -26,7 +28,8 @@ namespace Treinou.Application.UseCases.Student.UpdateStudent
             string cpf,
             string phoneNumber,
             double weight,
-            double height
+            double height,
+            string? userId = null
         )
         {
             Id = id;
@@ -36,6 +39,7 @@ namespace Treinou.Application.UseCases.Student.UpdateStudent
             PhoneNumber = phoneNumber;
             Weight = weight;
             Height = height;
+            UserId = userId;
         }
     }
 }

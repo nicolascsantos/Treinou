@@ -19,6 +19,8 @@ namespace Treinou.Application.UseCases.Teacher.UpdateTeacher
 
         public string PhoneNumber { get; private set; }
 
+        public string? UserId { get; private set; }
+
         public UpdateTeacherInput(
             Guid id,
             string name,
@@ -26,7 +28,8 @@ namespace Treinou.Application.UseCases.Teacher.UpdateTeacher
             string cpf,
             string cref,
             string description,
-            string phoneNumber
+            string phoneNumber,
+            string? userId = null
         )
         {
             Id = id;
@@ -36,6 +39,7 @@ namespace Treinou.Application.UseCases.Teacher.UpdateTeacher
             CREF = cref;
             Description = description;
             PhoneNumber = phoneNumber;
+            UserId = userId;
         }
     }
 }

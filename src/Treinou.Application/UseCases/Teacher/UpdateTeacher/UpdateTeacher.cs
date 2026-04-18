@@ -26,6 +26,8 @@ namespace Treinou.Application.UseCases.Teacher.UpdateTeacher
                 ValueObjectFactory.CreatePhoneNumber(request.PhoneNumber)
             );
 
+            teacherToBeUpdated.UserId = request.UserId;
+
             await _teacherRepository.Update(teacherToBeUpdated, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
             return TeacherModelOutput.FromTeacher(teacherToBeUpdated);

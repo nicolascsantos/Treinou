@@ -19,6 +19,8 @@ namespace Treinou.Application.UseCases.Teacher.CreateTeacher
 
         public DateTime BirthDate { get; set; }
 
+        public string? UserId { get; set; }
+
         public CreateTeacherInput(
             string name,
             string email,
@@ -26,7 +28,8 @@ namespace Treinou.Application.UseCases.Teacher.CreateTeacher
             string cref,
             string description,
             string phoneNumber,
-            DateTime birthDate
+            DateTime birthDate,
+            string? userId = null
         )
         {
             Name = name;
@@ -36,6 +39,7 @@ namespace Treinou.Application.UseCases.Teacher.CreateTeacher
             Description = description;
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
+            UserId = userId;
         }
     }
 }

@@ -20,6 +20,8 @@ namespace Treinou.Application.DTOs
 
         public DateTime BirthDate { get; private set; }
 
+        public string? UserId { get; private set; }
+
         public TeacherDTO(
             Guid id,
             string name,
@@ -28,7 +30,8 @@ namespace Treinou.Application.DTOs
             string cref,
             string description,
             string phoneNumber,
-            DateTime birthDate
+            DateTime birthDate,
+            string? userId = null
         )
         {
             Id = id;
@@ -39,6 +42,7 @@ namespace Treinou.Application.DTOs
             Description = description;
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
+            UserId = userId;
         }
 
         public static TeacherDTO FromTeacher(Entity.Teacher teacher)
@@ -50,7 +54,8 @@ namespace Treinou.Application.DTOs
                 teacher.CREF.Number,
                 teacher.Description,
                 teacher.PhoneNumber.Number,
-                teacher.BirthDate
+                teacher.BirthDate,
+                teacher.UserId
             );
     }
 }

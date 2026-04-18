@@ -26,6 +26,8 @@ namespace Treinou.Application.UseCases.Student.Common
 
         public DateTime CreatedAt { get; set; }
 
+        public string? UserId { get; set; }
+
         public StudentModelOutput(
             Guid id,
             string name,
@@ -37,7 +39,8 @@ namespace Treinou.Application.UseCases.Student.Common
             double height,
             TeacherDTO teacher,
             bool isActive,
-            DateTime createdAt
+            DateTime createdAt,
+            string? userId
         )
         {
             Id = id;
@@ -51,6 +54,7 @@ namespace Treinou.Application.UseCases.Student.Common
             Teacher = teacher;
             IsActive = isActive;
             CreatedAt = createdAt;
+            UserId = userId;
         }
 
         public static StudentModelOutput FromStudent(Domain.Entities.Student student)
@@ -74,7 +78,8 @@ namespace Treinou.Application.UseCases.Student.Common
                     student.Teacher.PhoneNumber.Number,
                     student.Teacher.BirthDate),
                 student.IsActive,
-                student.CreatedAt
+                student.CreatedAt,
+                student.UserId
             );
         }
     }

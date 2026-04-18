@@ -22,6 +22,8 @@ namespace Treinou.Application.UseCases.Teacher.Common
 
         public DateTime CreatedAt { get; set; }
 
+        public string? UserId { get; set; }
+
         public List<StudentDTO> Students { get; set; }
 
         public TeacherModelOutput(
@@ -34,6 +36,7 @@ namespace Treinou.Application.UseCases.Teacher.Common
             string phoneNumber,
             DateTime birthDate,
             DateTime createdAt,
+            string? userId,
             List<StudentDTO> students
         )
         {
@@ -46,6 +49,7 @@ namespace Treinou.Application.UseCases.Teacher.Common
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
             CreatedAt = createdAt;
+            UserId = userId;
             Students = students;
         }
 
@@ -67,7 +71,8 @@ namespace Treinou.Application.UseCases.Teacher.Common
                         student.Height,
                         student.IsActive,
                         student.CreatedAt,
-                        student.TeacherId
+                        student.TeacherId,
+                        student.UserId
                     ));
                 }
             }
@@ -82,6 +87,7 @@ namespace Treinou.Application.UseCases.Teacher.Common
                 teacher.PhoneNumber.Number,
                 teacher.BirthDate,
                 teacher.CreatedAt,
+                teacher.UserId,
                 students
                 );
         }

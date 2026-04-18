@@ -27,6 +27,8 @@ namespace Treinou.Application.Adapters
                 DateTime.Now
             );
 
+            teacher.UserId = input.UserId;
+
             return teacher;
         }
 

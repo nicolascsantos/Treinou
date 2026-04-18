@@ -43,6 +43,13 @@ namespace Treinou.Infraestructure.Configurations
                 .OwnsOne(x => x.CREF)
                 .Property(x => x.Number)
                 .HasColumnName("CREF");
+
+            teachersConfiguration.Property(x => x.UserId)
+                .IsRequired(false);
+
+            teachersConfiguration.HasIndex(x => x.UserId)
+                .IsUnique()
+                .HasFilter("[UserId] IS NOT NULL");
         }
     }
 }
