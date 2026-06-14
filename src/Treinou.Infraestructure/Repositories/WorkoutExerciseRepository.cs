@@ -34,7 +34,7 @@ namespace Treinou.Infraestructure.Repositories
         {
             return await _workoutExercises
                 .Include(we => we.Exercise)
-                .Where(we => we.Id == workoutId)
+                .Where(we => we.WorkoutId == workoutId)
                 .OrderBy(we => we.Order)
                 .ToListAsync(cancellationToken);
         }
