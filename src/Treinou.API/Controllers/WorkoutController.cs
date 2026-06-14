@@ -6,6 +6,7 @@ using Treinou.Application.UseCases.Workout.CreateWorkout;
 using Treinou.Application.UseCases.Workout.DeleteWorkout;
 using Treinou.Application.UseCases.Workout.GetWorkout;
 using Treinou.Application.UseCases.Workout.ListWorkouts;
+using Treinou.Application.UseCases.Workout.UpdateWorkout;
 using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.API.Controllers
@@ -46,6 +47,15 @@ namespace Treinou.API.Controllers
         {
             var output = await _mediator.Send(new DeleteWorkoutInput(id), cancellationToken);
             return NoContent();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<WorkoutModelOutput>))]
+        [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Update([FromBody] UpdateWorkoutInput input, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(input, cancellationToken);
+            return Ok(new APIResponse<WorkoutModelOutput>(output));
         }
 
         [HttpGet]
