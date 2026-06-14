@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Treinou.API.Models;
 using Treinou.Application.UseCases.Workout.Common;
@@ -13,6 +14,7 @@ namespace Treinou.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WorkoutController : ControllerBase
     {
         private IMediator _mediator;
