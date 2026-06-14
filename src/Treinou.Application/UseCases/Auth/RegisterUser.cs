@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Security.Authentication;
+using Treinou.Domain.Enums;
 using Treinou.Infraestructure.Identity;
 
 namespace Treinou.Application.UseCases.Auth
@@ -18,7 +19,7 @@ namespace Treinou.Application.UseCases.Auth
             {
                 UserName = request.Email,
                 Email = request.Email,
-                UserType = request.UserType
+                UserType = UserType.Student   // hardcoded default; teacher elevation requires a separate admin flow
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
