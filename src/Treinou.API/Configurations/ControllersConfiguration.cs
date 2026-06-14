@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 using System.Threading.RateLimiting;
 using Treinou.API.Configurations.Policies;
 using Treinou.API.Filters;
@@ -33,9 +34,24 @@ namespace Treinou.API.Configurations
 
         private static IServiceCollection AddDocumentation(this IServiceCollection services)
         {
-            services.AddOpenApi();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                var bearerScheme = new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Por favor, informe um token válido",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                };
+                options.AddSecurityDefinition("Bearer", bearerScheme);
+                options.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
+                {
+                    { new OpenApiSecuritySchemeReference("Bearer"), new List<string>() }
+                });
+            });
             return services;
         }
 
@@ -44,7 +60,7 @@ namespace Treinou.API.Configurations
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(x => x.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1"));
+                app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Treinou API V1"));
             }
             return app;
         }

@@ -29,7 +29,7 @@ All six plans are independent — none depends on another's changes being merged
 | 001 | [Critical data bugs + routing fixes](001-critical-data-bugs.md) | bug | P0 | M | LOW | DONE (worktree: `advisor/001-critical-data-bugs`) |
 | 002 | [Domain invariant correctness](002-domain-invariants.md) | bug | P1 | S | LOW | DONE (worktree: `advisor/002-domain-invariants`) |
 | 003 | [Auth input hardening + error response cleanup](003-auth-input-hardening.md) | security | P1 | S | LOW | DONE (worktree: `advisor/003-auth-input-hardening`) |
-| 004 | [Authorize all endpoints](004-authorize-all-endpoints.md) | security | P1 | M | LOW | TODO |
+| 004 | [Authorize all endpoints](004-authorize-all-endpoints.md) | security | P1 | M | LOW | DONE (worktree: `advisor/004-authorize-endpoints`, commit `9639ef3`) |
 | 005 | [N+1 query + unnecessary Include + Transient→Scoped](005-performance-queries.md) | perf | P2 | S | LOW | TODO |
 | 006 | [Establish test baseline](006-test-baseline.md) | tests | P2 | L | LOW | TODO |
 

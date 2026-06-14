@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Treinou.API.Configurations;
 using Treinou.Infraestructure.Identity;
 
@@ -10,6 +11,10 @@ builder.Services.AddUseCases();
 builder.Services.AddAppConnections(builder.Configuration);
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddEntityFrameworkStores<AuthDbContext>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(jwtOptions =>
+{
+
+});
 
 var app = builder.Build();
 
