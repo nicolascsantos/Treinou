@@ -22,7 +22,7 @@ namespace Treinou.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id::guid}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<ExerciseTypeModelOutput>))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ namespace Treinou.API.Controllers
             return CreatedAtAction(nameof(Create), new { output.Id }, output);
         }
 
-        [HttpDelete("{id::guid}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(204, StatusCode = StatusCodes.Status204NoContent, Type = typeof(void))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
