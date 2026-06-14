@@ -29,7 +29,7 @@ namespace Treinou.Domain.Entities
             Description = description;
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
-            CreatedAt = DateTime.Now;
+            CreatedAt = createdAt;
             Validate();
         }
 

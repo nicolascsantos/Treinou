@@ -56,7 +56,8 @@ namespace Treinou.Domain.Entities
         {
             Name = name;
             TeacherId = teacherId;
-            StudentId = studentId; 
+            StudentId = studentId;
+            Validate();
         }
 
         public void AddTeacher(Teacher teacher)

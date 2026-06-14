@@ -77,6 +77,7 @@ namespace Treinou.Domain.Entities
             NumberOfRepetitions = numberOfRepetitions;
             Rest = rest;
             Notes = notes ?? string.Empty;
+            Validate();
         }
     }
 }
