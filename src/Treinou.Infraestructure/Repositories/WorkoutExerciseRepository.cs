@@ -34,7 +34,7 @@ namespace Treinou.Infraestructure.Repositories
         {
             return await _workoutExercises
                 .Include(we => we.Exercise)
-                .Where(we => we.Id == workoutId)
+                .Where(we => we.WorkoutId == workoutId)
                 .OrderBy(we => we.Order)
                 .ToListAsync(cancellationToken);
         }
@@ -51,7 +51,7 @@ namespace Treinou.Infraestructure.Repositories
         public async Task<SearchOutput<WorkoutExercise>> Search(SearchInput searchInput, CancellationToken cancellationToken)
         {
             var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
-            var query = _workoutExercises.AsNoTracking().AsQueryable();
+            var query = _workoutExercises.AsNoTracking().Include(x => x.Workout).AsQueryable();
             query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
 
             if (!string.IsNullOrWhiteSpace(searchInput.Search))

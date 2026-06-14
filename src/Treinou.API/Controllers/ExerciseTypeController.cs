@@ -6,8 +6,7 @@ using Treinou.Application.UseCases.ExerciseType.CreateExerciseType;
 using Treinou.Application.UseCases.ExerciseType.DeleteExerciseType;
 using Treinou.Application.UseCases.ExerciseType.GetExerciseType;
 using Treinou.Application.UseCases.ExerciseType.ListExerciseTypes;
-using Treinou.Application.UseCases.Student.Common;
-using Treinou.Application.UseCases.Student.UpdateStudent;
+using Treinou.Application.UseCases.ExerciseType.UpdateExerciseType;
 using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.API.Controllers
@@ -23,7 +22,7 @@ namespace Treinou.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id::guid}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<ExerciseTypeModelOutput>))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -42,7 +41,7 @@ namespace Treinou.API.Controllers
             return CreatedAtAction(nameof(Create), new { output.Id }, output);
         }
 
-        [HttpDelete("{id::guid}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(204, StatusCode = StatusCodes.Status204NoContent, Type = typeof(void))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -75,12 +74,12 @@ namespace Treinou.API.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<StudentModelOutput>))]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<ExerciseTypeModelOutput>))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Update([FromBody] UpdateStudentInput input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update([FromBody] UpdateExerciseTypeInput input, CancellationToken cancellationToken)
         {
             var output = await _mediator.Send(input, cancellationToken);
-            return Ok(new APIResponse<StudentModelOutput>(output));
+            return Ok(new APIResponse<ExerciseTypeModelOutput>(output));
         }
     }
 }

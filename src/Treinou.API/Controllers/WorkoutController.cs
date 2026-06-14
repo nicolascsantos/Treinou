@@ -6,6 +6,7 @@ using Treinou.Application.UseCases.Workout.CreateWorkout;
 using Treinou.Application.UseCases.Workout.DeleteWorkout;
 using Treinou.Application.UseCases.Workout.GetWorkout;
 using Treinou.Application.UseCases.Workout.ListWorkouts;
+using Treinou.Application.UseCases.Workout.UpdateWorkout;
 using Treinou.Domain.SeedWork.SearchableRepository;
 
 namespace Treinou.API.Controllers
@@ -19,7 +20,7 @@ namespace Treinou.API.Controllers
         public WorkoutController(IMediator mediator)
             => _mediator = mediator;
 
-        [HttpGet("{id::guid}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<WorkoutModelOutput>))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -39,13 +40,22 @@ namespace Treinou.API.Controllers
             return CreatedAtAction(nameof(Create), new { output.Id }, output);
         }
 
-        [HttpDelete("{id::guid}")]
+        [HttpDelete("{id:guid}")]
         [ProducesResponseType(204, StatusCode = StatusCodes.Status204NoContent, Type = typeof(void))]
         [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var output = await _mediator.Send(new DeleteWorkoutInput(id), cancellationToken);
             return NoContent();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(APIResponse<WorkoutModelOutput>))]
+        [ProducesResponseType(404, StatusCode = StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Update([FromBody] UpdateWorkoutInput input, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(input, cancellationToken);
+            return Ok(new APIResponse<WorkoutModelOutput>(output));
         }
 
         [HttpGet]
