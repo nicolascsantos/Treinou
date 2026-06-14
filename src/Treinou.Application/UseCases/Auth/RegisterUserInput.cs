@@ -1,6 +1,4 @@
-﻿using MediatR;
-using System.Text.Json.Serialization;
-using Treinou.Domain.Enums;
+using MediatR;
 
 namespace Treinou.Application.UseCases.Auth
 {
@@ -10,14 +8,10 @@ namespace Treinou.Application.UseCases.Auth
 
         public string Password { get; set; } = null!;
 
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public UserType UserType { get; set; }
-
-        public RegisterUserInput(string email, string password, UserType userType)
+        public RegisterUserInput(string email, string password)
         {
             Email = email;
             Password = password;
-            UserType = userType;
         }
     }
 }

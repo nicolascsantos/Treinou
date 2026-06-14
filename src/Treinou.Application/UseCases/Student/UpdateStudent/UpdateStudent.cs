@@ -27,8 +27,6 @@ namespace Treinou.Application.UseCases.Student.UpdateStudent
                 request.Height
             );
 
-            studentToBeUpdated.UserId = request.UserId;
-
             await _studentRepository.Update(studentToBeUpdated, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 

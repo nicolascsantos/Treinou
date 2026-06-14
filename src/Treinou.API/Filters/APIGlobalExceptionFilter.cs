@@ -34,7 +34,7 @@ namespace Treinou.API.Filters
             else if (exception is NotFoundException)
             {
                 var ex = exception as NotFoundException;
-                details.Title = "One or more validation errors occurred.";
+                details.Title = "Resource not found.";
                 details.Status = StatusCodes.Status404NotFound;
                 details.Detail = ex!.Message;
                 details.Type = "NotFound";
@@ -52,7 +52,7 @@ namespace Treinou.API.Filters
                 details.Title = "An unexpected error occured.";
                 details.Status = StatusCodes.Status422UnprocessableEntity;
                 details.Type = "UnexpectedError";
-                details.Detail = $"Message: {exception.Message};InnerException: {exception.InnerException?.Message}";
+                details.Detail = exception.Message;
             }
             //else if (exception is RelatedAggregateException)
             //{
