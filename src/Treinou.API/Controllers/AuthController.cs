@@ -16,12 +16,21 @@ namespace Treinou.API.Controllers
         }
 
         [HttpPost("register")]
-        [ProducesResponseType(201, StatusCode = StatusCodes.Status201Created)]
-        [ProducesResponseType(422, StatusCode = StatusCodes.Status422UnprocessableEntity, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(typeof(RegisterUserOutput), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Register([FromBody] RegisterUserInput input, CancellationToken cancellationToken)
         {
             var output = await _mediator.Send(input, cancellationToken);
-            return CreatedAtAction(nameof(Register), new RegisterUserOutput(output.Id, output.Email!, output.UserType));
+            return CreatedAtAction(nameof(Register), output);
+        }
+
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(LoginUserOutput), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Login([FromBody] LoginUserInput input, CancellationToken cancellationToken)
+        {
+            var output = await _mediator.Send(input, cancellationToken);
+            return Ok(output);
         }
     }
 }

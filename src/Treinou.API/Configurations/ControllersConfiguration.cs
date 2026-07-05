@@ -39,12 +39,12 @@ namespace Treinou.API.Configurations
             {
                 var bearerScheme = new OpenApiSecurityScheme
                 {
-                    In = ParameterLocation.Header,
-                    Description = "Por favor, informe um token válido",
+                    Description = "Informe o token JWT (sem o prefixo 'Bearer')",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT"
                 };
                 options.AddSecurityDefinition("Bearer", bearerScheme);
                 options.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
@@ -59,8 +59,36 @@ namespace Treinou.API.Configurations
         {
             if (app.Environment.IsDevelopment())
             {
+                // Swashbuckle 10.x + Microsoft.OpenApi 2.4.1 bug: OpenApiSecuritySchemeReference
+                // as a dictionary key serializes as {} instead of {"Bearer":[]}.
+                // This middleware patches the generated spec before it reaches Swagger UI.
+                app.Use(async (ctx, next) =>
+                {
+                    if (ctx.Request.Path == "/swagger/v1/swagger.json")
+                    {
+                        var originalBody = ctx.Response.Body;
+                        using var ms = new MemoryStream();
+                        ctx.Response.Body = ms;
+                        await next(ctx);
+                        ms.Seek(0, SeekOrigin.Begin);
+                        var json = await new StreamReader(ms).ReadToEndAsync();
+                        var patched = System.Text.RegularExpressions.Regex.Replace(
+                            json,
+                            @"""security"":\s*\[\s*\{\s*\}\s*\]",
+                            @"""security"":[{""Bearer"":[]}]");
+                        ctx.Response.Body = originalBody;
+                        var bytes = System.Text.Encoding.UTF8.GetBytes(patched);
+                        ctx.Response.ContentLength = bytes.Length;
+                        await ctx.Response.Body.WriteAsync(bytes);
+                    }
+                    else
+                    {
+                        await next(ctx);
+                    }
+                });
+
                 app.UseSwagger();
-                app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Treinou API V1"));
+                app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "swagger"));
             }
             return app;
         }

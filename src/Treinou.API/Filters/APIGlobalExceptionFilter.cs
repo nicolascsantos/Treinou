@@ -49,9 +49,9 @@ namespace Treinou.API.Filters
             }
             else if (exception is AuthenticationException)
             {
-                details.Title = "An unexpected error occured.";
-                details.Status = StatusCodes.Status422UnprocessableEntity;
-                details.Type = "UnexpectedError";
+                details.Title = "Authentication failed.";
+                details.Status = StatusCodes.Status401Unauthorized;
+                details.Type = "Unauthorized";
                 details.Detail = exception.Message;
             }
             //else if (exception is RelatedAggregateException)
