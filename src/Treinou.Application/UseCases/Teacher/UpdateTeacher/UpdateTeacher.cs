@@ -29,7 +29,7 @@ namespace Treinou.Application.UseCases.Teacher.UpdateTeacher
             teacherToBeUpdated.UserId = request.UserId;
 
             await _teacherRepository.Update(teacherToBeUpdated, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
             return TeacherModelOutput.FromTeacher(teacherToBeUpdated);
         }
     }

@@ -20,7 +20,7 @@ namespace Treinou.Application.UseCases.Student.Common
 
         public double Height { get; set; }
 
-        public TeacherDTO Teacher { get; set; }
+        public TeacherDTO? Teacher { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -37,7 +37,7 @@ namespace Treinou.Application.UseCases.Student.Common
             DateTime birthDate,
             double weight,
             double height,
-            TeacherDTO teacher,
+            TeacherDTO? teacher,
             bool isActive,
             DateTime createdAt,
             string? userId
@@ -68,7 +68,7 @@ namespace Treinou.Application.UseCases.Student.Common
                 student.BirthDate,
                 student.Weight,
                 student.Height,
-                new TeacherDTO(
+                student.Teacher is null ? null : new TeacherDTO(
                     student.Teacher.Id,
                     student.Teacher.Name,
                     student.Teacher.Email.Address,

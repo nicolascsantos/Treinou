@@ -22,7 +22,7 @@ namespace Treinou.Application.UseCases.Workout.DeleteWorkout
                 throw new NotFoundException($"Workout '{request.Id}' not found.");
 
             await _workoutRepository.Delete(workoutToBeDeleted, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
             return await Task.FromResult(Unit.Value);
         }
     }

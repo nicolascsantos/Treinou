@@ -17,7 +17,7 @@ namespace Treinou.Application.UseCases.WorkoutExercise.DeleteWorkoutExercise
             var workoutExerciseToBeDeleted = await _workoutExerciseRepository.Get(request.Id, cancellationToken);
 
             await _workoutExerciseRepository.Delete(workoutExerciseToBeDeleted, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return await Task.FromResult(Unit.Value);
         }

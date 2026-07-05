@@ -20,7 +20,7 @@ namespace Treinou.Application.UseCases.ExerciseType.UpdateExerciseType
             exerciseTypeToBeUpdated.Update(request.Name);
 
             await _exerciseTypeRepository.Update(exerciseTypeToBeUpdated, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return ExerciseTypeModelOutput.FromExerciseType(exerciseTypeToBeUpdated);
         }

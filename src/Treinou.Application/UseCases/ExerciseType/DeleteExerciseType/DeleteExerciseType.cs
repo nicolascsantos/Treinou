@@ -22,7 +22,7 @@ namespace Treinou.Application.UseCases.ExerciseType.DeleteExerciseType
                 throw new NotFoundException($"Exercise type '{request.Id}' not found.");
 
             await _exerciseTypeRepository.Delete(exeriseTypeToBeDeleted, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
             return await Task.FromResult(Unit.Value);
         }
     }

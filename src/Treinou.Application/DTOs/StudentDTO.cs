@@ -24,7 +24,7 @@ namespace Treinou.Application.DTOs
 
         public DateTime CreatedAt { get; private set; }
 
-        public Guid TeacherId { get; private set; }
+        public Guid? TeacherId { get; private set; }
 
         public string? UserId { get; private set; }
 
@@ -39,7 +39,7 @@ namespace Treinou.Application.DTOs
             double height,
             bool isActive,
             DateTime createdAt,
-            Guid teacherId,
+            Guid? teacherId,
             string? userId
         )
         {

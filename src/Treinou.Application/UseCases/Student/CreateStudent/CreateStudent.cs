@@ -31,8 +31,17 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
             var student = StudentAdapter.ToEntity(request);
             await AddTeacher(student, cancellationToken);
 
-            await _studentRepository.Insert(student, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            try
+            {
+                await _studentRepository.Insert(student, cancellationToken);
+                await _unitOfWork.CommitAsync(cancellationToken);
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync(cancellationToken);
+            }
+
+            
 
             // Use Adapter Pattern to convert Domain Entity to Output DTO
             return StudentAdapter.ToOutput(student);
@@ -40,9 +49,11 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
 
         private async Task AddTeacher(Domain.Entities.Student student, CancellationToken cancellationToken)
         {
+            if (student.TeacherId is null) return;
+
             if (student.TeacherId != default)
             {
-                var teacher = await _teacherRepository.Get(student.TeacherId, cancellationToken);
+                var teacher = await _teacherRepository.Get(student.TeacherId ?? default, cancellationToken);
                 student.Teacher = teacher;
             }
         }

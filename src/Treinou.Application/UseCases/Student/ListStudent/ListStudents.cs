@@ -21,7 +21,7 @@ namespace Treinou.Application.UseCases.Student.ListStudent
             {
                 if (student.TeacherId != default)
                 {
-                    var teacher = await _teacherRepository.Get(student.TeacherId, cancellationToken);
+                    var teacher = await _teacherRepository.Get(student.TeacherId ?? default, cancellationToken);
                     student.Teacher = teacher;
                 }
             }

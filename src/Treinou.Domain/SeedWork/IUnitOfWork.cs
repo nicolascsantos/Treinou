@@ -1,8 +1,9 @@
 ﻿namespace Treinou.Domain.SeedWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        public Task Commit(CancellationToken cancellationToken);
-        public Task Rollback(CancellationToken cancellationToken);
+        public Task BeginTransactionAsync();
+        public Task<int> CommitAsync(CancellationToken cancellationToken);
+        public Task RollbackAsync(CancellationToken cancellationToken);
     }
 }

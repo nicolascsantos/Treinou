@@ -29,7 +29,7 @@ namespace Treinou.Domain.Entities
 
         public string? UserId { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public Guid? TeacherId { get; set; }
 
         public Teacher Teacher { get; set; } = null!;
 

@@ -17,7 +17,7 @@ namespace Treinou.Application.UseCases.Teacher.DeleteTeacher
             var teacherToBeDeleted = await _teacherRepository.Get(request.Id, cancellationToken);
 
             await _teacherRepository.Delete(teacherToBeDeleted, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
     }

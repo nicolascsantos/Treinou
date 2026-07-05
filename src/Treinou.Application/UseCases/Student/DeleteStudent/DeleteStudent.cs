@@ -28,7 +28,7 @@ namespace Treinou.Application.UseCases.Student.DeleteStudent
 
             // Delete the student
             await _studentRepository.Delete(student, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
             return await Task.FromResult(Unit.Value);
         }
     }

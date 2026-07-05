@@ -42,7 +42,7 @@ namespace Treinou.Application.UseCases.Workout.CreateWorkout
             }
 
             await _workoutRepository.Insert(workout, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return WorkoutModelOutput.FromWorkout(workout);
         }

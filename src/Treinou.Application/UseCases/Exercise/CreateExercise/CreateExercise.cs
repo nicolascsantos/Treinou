@@ -31,7 +31,7 @@ namespace Treinou.Application.UseCases.Exercise.CreateExercise
             );
 
             await _exerciseRepository.Insert(exercise, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return ExerciseModelOutput.FromExercise(exercise);
         }

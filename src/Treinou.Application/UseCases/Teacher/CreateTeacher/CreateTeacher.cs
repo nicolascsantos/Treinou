@@ -28,7 +28,7 @@ namespace Treinou.Application.UseCases.Teacher.CreateTeacher
             var teacher = TeacherAdapter.ToEntity(request);
 
             await _teacherRepository.Insert(teacher, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             // Use Adapter Pattern to convert Domain Entity to Output DTO
             return TeacherAdapter.ToOutput(teacher);

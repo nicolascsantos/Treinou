@@ -28,7 +28,7 @@ namespace Treinou.Application.UseCases.Student.UpdateStudent
             );
 
             await _studentRepository.Update(studentToBeUpdated, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return StudentModelOutput.FromStudent(studentToBeUpdated);
         }

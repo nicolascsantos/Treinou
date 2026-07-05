@@ -25,7 +25,7 @@ namespace Treinou.Application.UseCases.WorkoutExercise.UpdateWorkoutExercise
             );
 
             await _workoutExerciseRepository.Update(workoutExerciseToBeUpdated, cancellationToken);
-            await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return WorkoutExerciseModelOutput.FromWorkoutExercise(workoutExerciseToBeUpdated);
         }

@@ -20,7 +20,7 @@ namespace Treinou.Application.UseCases.Exercise.DeleteExercise
             if (exerciseToDelete is null) throw new NotFoundException($"Exercise '{request.Id}' not found.");
 
             await _exerciseRepository.Delete(exerciseToDelete, cancellationToken);
-            await _unitofWork.Commit(cancellationToken);
+            await _unitofWork.CommitAsync(cancellationToken);
             return await Task.FromResult(Unit.Value);
         }
     }

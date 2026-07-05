@@ -19,7 +19,7 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
 
         public double Height { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public Guid? TeacherId { get; set; }
 
         public bool IsActive { get; set; } = true;
 
@@ -33,7 +33,7 @@ namespace Treinou.Application.UseCases.Student.CreateStudent
             DateTime birthDate,
             double weight,
             double height,
-            Guid teacherId,
+            Guid? teacherId,
             bool isActive = true,
             string? userId = null
         )
