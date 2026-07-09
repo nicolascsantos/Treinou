@@ -15,6 +15,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddAndConfigureControllers();
 builder.Services.AddUseCases();
 builder.Services.AddAppConnections(builder.Configuration);
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
