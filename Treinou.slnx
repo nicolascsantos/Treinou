@@ -9,5 +9,7 @@
     <Project Path="src/Treinou.Domain/Treinou.Domain.csproj" Id="f781a180-a27c-45b4-98b1-aae3c0cbf185" />
     <Project Path="src/Treinou.Infraestructure/Treinou.Infraestructure.csproj" Id="2ddd29af-8558-403b-904f-55208e3081ea" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Treinou.UnitTests/Treinou.UnitTests.csproj" Id="92835e1e-8eae-46c1-9cae-3c8aa0da24ff" />
+  </Folder>
 </Solution>
