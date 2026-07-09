@@ -13,6 +13,8 @@ namespace Treinou.Domain.Repository
     {
         Task Insert(WorkoutExercise workoutExercise, CancellationToken cancellationToken);
 
+        Task<bool> ExerciseForWorkoutAlreadyExists(Guid workoutId, Guid exerciseId);
+
         Task<WorkoutExercise> Get(Guid id, CancellationToken cancellationToken);
 
         Task<IEnumerable<WorkoutExercise>> GetByWorkoutId(Guid workoutId, CancellationToken cancellationToken);

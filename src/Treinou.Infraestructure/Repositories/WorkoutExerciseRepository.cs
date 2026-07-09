@@ -76,5 +76,9 @@ namespace Treinou.Infraestructure.Repositories
                 ("name", SearchOrder.DESCENDING) => query.OrderByDescending(x => x.Workout.Name),
                 _ => query.OrderBy(x => x.Id)
             };
+
+        public async Task<bool> ExerciseForWorkoutAlreadyExists(Guid workoutId, Guid exerciseId)
+            => await _workoutExercises.AnyAsync(x => x.WorkoutId == workoutId && x.ExerciseId == exerciseId);
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Treinou.Application.UseCases.WorkoutExercise.Common;
+using Treinou.Domain.Exceptions;
 using Treinou.Domain.Repository;
 using Treinou.Domain.SeedWork;
 using Entity = Treinou.Domain.Entities;
@@ -27,6 +28,9 @@ namespace Treinou.Application.UseCases.WorkoutExercise.CreateWorkoutExercise
                 request.Rest,
                 request.Notes
             );
+
+            if (await _workoutExerciseRepository.ExerciseForWorkoutAlreadyExists(workoutExercise.WorkoutId, workoutExercise.ExerciseId))
+                throw new EntityValidationException("Exercise already included in workout.");
 
             await _workoutExerciseRepository.Insert(workoutExercise, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);

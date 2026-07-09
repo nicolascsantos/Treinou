@@ -29,7 +29,10 @@ namespace Treinou.Infraestructure.Configurations
                 .HasMany(x => x.Exercises) 
                 .WithOne("Workout")                             
                 .HasForeignKey("WorkoutId")
-                .OnDelete(DeleteBehavior.Cascade);           
+                .OnDelete(DeleteBehavior.Cascade);
+
+            workoutConfiguration.Property(x => x.CreatedAt)
+                .IsRequired();
         }
     }
 }
