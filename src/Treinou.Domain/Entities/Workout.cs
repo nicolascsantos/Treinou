@@ -18,6 +18,8 @@ namespace Treinou.Domain.Entities
         private readonly List<WorkoutExercise> _exercises = new();
         public IReadOnlyCollection<WorkoutExercise> Exercises => _exercises.AsReadOnly();
 
+        public DateTime CreatedAt { get; private set; }
+
         public Workout(
             string name,
             Guid teacherId,
@@ -29,6 +31,7 @@ namespace Treinou.Domain.Entities
             TeacherId = teacherId;
             StudentId = studentId;
             IsActive = isActive;
+            CreatedAt = DateTime.Now;
         }
 
         public void Activate()
