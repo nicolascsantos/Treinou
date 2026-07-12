@@ -35,6 +35,8 @@ namespace Treinou.Domain.Entities
 
         public ICollection<Workout> Workouts { get; } = new List<Workout>();
 
+        public ICollection<WeightEntry> WeightEntries { get; } = new List<WeightEntry>();
+
         public Student(
             string name,
             Email email,

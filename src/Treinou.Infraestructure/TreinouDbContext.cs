@@ -18,6 +18,8 @@ namespace Treinou.Infraestructure
 
         public DbSet<WorkoutExercise> WorkoutExercises => Set<WorkoutExercise>();
 
+        public DbSet<WeightEntry> WeightEntries => Set<WeightEntry>();
+
         public TreinouDbContext(DbContextOptions<TreinouDbContext> options) : base(options)
         {
 

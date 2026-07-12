@@ -26,6 +26,7 @@ namespace Treinou.API.Configurations
             services.AddTransient<ITeacherRepository, TeacherRepository>();
             services.AddTransient<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
             services.AddTransient<IWorkoutRepository, WorkoutRepository>();
+            services.AddTransient<IWeightEntryRepository, WeightEntryRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }

@@ -31,7 +31,7 @@ namespace Treinou.Infraestructure.Repositories
         }
 
         public async Task Insert(ExerciseType aggregate, CancellationToken cancellationToken)
-            => await _exerciseTypes.AddAsync(aggregate);
+            => await _exerciseTypes.AddAsync(aggregate, cancellationToken);
 
         public async Task Update(ExerciseType aggregate, CancellationToken cancellationToken)
             => await Task.FromResult(_context.Update(aggregate));
