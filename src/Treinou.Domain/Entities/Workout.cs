@@ -31,7 +31,7 @@ namespace Treinou.Domain.Entities
             TeacherId = teacherId;
             StudentId = studentId;
             IsActive = isActive;
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.UtcNow;
         }
 
         public void Activate()
