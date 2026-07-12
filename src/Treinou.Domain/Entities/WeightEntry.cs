@@ -18,10 +18,15 @@ namespace Treinou.Domain.Entities
         public WeightEntry() {}
 
         public WeightEntry(Guid studentId, double weight)
+            : this(studentId, weight, DateTime.UtcNow)
+        {
+        }
+
+        public WeightEntry(Guid studentId, double weight, DateTime dateAdded)
         {
             StudentId = studentId;
             Weight = weight;
-            DateAdded = DateTime.UtcNow;
+            DateAdded = dateAdded;
             CreatedAt = DateTime.UtcNow;
             Validate();
         }
