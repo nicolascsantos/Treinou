@@ -31,10 +31,7 @@ namespace Treinou.Domain.Entities
             if (DateAdded > DateTime.UtcNow) 
                 throw new EntityValidationException("Weight date cannot be a future date.");
 
-            if (Weight < double.MinValue)
-                throw new EntityValidationException("Invalid weight.");
-
-            if (Weight < double.MaxValue)
+            if (Weight <= 0)
                 throw new EntityValidationException("Invalid weight.");
         }
 
