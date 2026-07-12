@@ -54,7 +54,7 @@ namespace Treinou.Domain.Entities
             Weight = weight;
             Height = height;
             IsActive = isActive;
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.UtcNow;
             Validate();
         }
 
