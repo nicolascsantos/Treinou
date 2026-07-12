@@ -44,7 +44,7 @@ namespace Treinou.Infraestructure.Repositories
         public async Task<SearchOutput<Student>> Search(SearchInput searchInput, CancellationToken cancellationToken)
         {
             var toSkip = (searchInput.Page - 1) * searchInput.PerPage;
-            var query = _students.AsNoTracking();
+            var query = _students.AsNoTracking().Include(x => x.Teacher).AsQueryable();
             query = AddOrderToQuery(query, searchInput.OrderBy, searchInput.Order);
 
             if (!string.IsNullOrWhiteSpace(searchInput.Search))
