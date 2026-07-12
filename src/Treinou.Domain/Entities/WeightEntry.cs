@@ -18,17 +18,22 @@ namespace Treinou.Domain.Entities
         public WeightEntry() {}
 
         public WeightEntry(Guid studentId, double weight)
+            : this(studentId, weight, DateTime.UtcNow)
+        {
+        }
+
+        public WeightEntry(Guid studentId, double weight, DateTime dateAdded)
         {
             StudentId = studentId;
             Weight = weight;
-            DateAdded = DateTime.UtcNow;
+            DateAdded = dateAdded;
             CreatedAt = DateTime.UtcNow;
             Validate();
         }
 
         public void Validate()
         {
-            if (DateAdded > DateTime.UtcNow) 
+            if (DateAdded > DateTime.UtcNow)
                 throw new EntityValidationException("Weight date cannot be a future date.");
 
             if (Weight <= 0)

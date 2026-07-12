@@ -11,19 +11,15 @@ namespace Treinou.Application.UseCases.WeightEntry.CreateWeightEntry
 
         public DateTime DateAdded { get; private set; }
 
-        public DateTime CreatedAt { get; private set; }
-
         public CreateWeightEntryInput(
             Guid studentId,
             double weight,
-            DateTime dateAdded,
-            DateTime createdAt
+            DateTime dateAdded
         )
         {
             StudentId = studentId;
             Weight = weight;
             DateAdded = dateAdded;
-            CreatedAt = createdAt;
         }
     }
 }
