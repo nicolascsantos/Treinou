@@ -24,7 +24,7 @@ namespace Treinou.Application.Adapters
                 input.Description,
                 phoneNumber,
                 input.BirthDate,
-                DateTime.Now
+                DateTime.UtcNow
             );
 
             teacher.UserId = input.UserId;
