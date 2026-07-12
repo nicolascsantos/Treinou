@@ -56,8 +56,8 @@ namespace Treinou.Infraestructure
 
         public void Dispose()
         {
-            _context.DisposeAsync();
-            _transaction?.DisposeAsync();
+            _context.DisposeAsync().GetAwaiter().GetResult();
+            _transaction?.DisposeAsync().GetAwaiter().GetResult();
         }
     }
 }
