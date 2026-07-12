@@ -13,7 +13,7 @@ namespace Treinou.API.Configurations
         {
             services.AddRateLimiter(options =>
             {
-                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+                options.AddPolicy("auth", context =>
                     RateLimitPartition.GetFixedWindowLimiter(
                         partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
                         factory: _ => new FixedWindowRateLimiterOptions
