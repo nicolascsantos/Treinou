@@ -20,14 +20,14 @@ namespace Treinou.API.Configurations
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddTransient<IExerciseRepository, ExerciseRepository>();
-            services.AddTransient<IExerciseTypeRepository, ExerciseTypeRepository>();
-            services.AddTransient<IStudentRepository, StudentRepository>();
-            services.AddTransient<ITeacherRepository, TeacherRepository>();
-            services.AddTransient<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
-            services.AddTransient<IWorkoutRepository, WorkoutRepository>();
-            services.AddTransient<IWeightEntryRepository, WeightEntryRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
+            services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+            services.AddScoped<IWeightEntryRepository, WeightEntryRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
