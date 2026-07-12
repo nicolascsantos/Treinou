@@ -17,7 +17,8 @@ namespace Treinou.Application.UseCases.WeightEntry.CreateWeightEntry
         {
             var weightEntry = new DomainEntity.WeightEntry(
                 request.StudentId,
-                request.Weight
+                request.Weight,
+                request.DateAdded
             );
 
             await _weightEntryRepository.Insert(weightEntry, cancellationToken);
