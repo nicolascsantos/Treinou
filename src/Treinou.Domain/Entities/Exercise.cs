@@ -26,7 +26,7 @@ namespace Treinou.Domain.Entities
             Name = name;
             ExcerciseTypeId = exerciseTypeId;
             IsActive = isActive;
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.UtcNow;
             ImageUrl = imageUrl;
             Validate();
         }
